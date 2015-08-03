@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+    <!--标题-->
+    <include layout="@layout/inc_title_layout"/>
+    <ListView
+        android:id="@+id/cat_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#f2f2f2"
+        android:dividerHeight="1px"
+        android:background="@color/panel_white"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/category_list_empty"
+        style="@style/AppTheme.UI.PannelText"
+        android:visibility="gone"/>
+</LinearLayout>

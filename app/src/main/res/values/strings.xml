@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">iBill</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="record_title">费用明细</string>
+    <string name="bill_title">我的账单</string>
+
+    <string name="setting_title">设置</string>
+    <string name="setting_pannel_category">分类设置</string>
+    <string name="setting_pannel_feedback">用户反馈</string>
+    <string name="setting_pannel_help">帮助中心</string>
+    <string name="setting_pannel_about">关于</string>
+
+    <string name="category_list_title">分类设置</string>
+    <string name="category_list_empty">暂无数据</string>
+    <string name="category_add_title">新增分类</string>
+    <string name="category_modify_title">编辑分类</string>
+    <string name="category_modify_name">名称</string>
+    <string name="category_modify_name_hint">2-10个字符</string>
+    <string name="category_modify_icon">图标</string>
+    <string name="category_modify_save_success">保存成功</string>
+
+    <string name="err_1001">账单id不能为0</string>
+    <string name="err_1002">附件URI不能为空</string>
+    <string name="err_1003">MIME不能为空</string>
+    <string name="err_1004">分类id不能为0</string>
+    <string name="err_1005">金额不能为0</string>
+    <string name="err_1006">备注不能为空</string>
+    <string name="err_1007">分类名称不能为空</string>
+    <string name="err_1008">分类图标不能为空</string>
+    <string name="err_1009">分类名称已经存在</string>
+</resources>
