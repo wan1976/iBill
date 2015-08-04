@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
     <!--标题-->
     <include layout="@layout/inc_title_layout"/>
 
@@ -12,30 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/panel_white">
+        android:paddingTop="10dp">
+
         <TextView
+            style="@style/AppTheme.UI.PannelText.InputTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_modify_name"
-            style="@style/AppTheme.UI.PannelText.InputTitle"/>
+            android:text="@string/category_modify_name"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/ic_split_v"/>
+
         <EditText
             android:id="@+id/cat_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:hint="@string/category_modify_name_hint"
-            android:background="@color/transparent"/>
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:hint="@string/category_modify_name_hint"/>
     </LinearLayout>
 
     <!--分类图标-->
@@ -43,29 +46,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/panel_white">
+        android:paddingTop="10dp">
+
         <TextView
+            style="@style/AppTheme.UI.PannelText.InputTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_modify_icon"
-            style="@style/AppTheme.UI.PannelText.InputTitle"/>
+            android:text="@string/category_modify_icon"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/ic_split_v"/>
+
         <net.toeach.widget.CustomGridView
             android:id="@+id/cat_icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:numColumns="5"
-            android:listSelector="@color/transparent"/>
+            android:layout_weight="1"
+            android:listSelector="@color/transparent"
+            android:numColumns="5"/>
     </LinearLayout>
 </LinearLayout>

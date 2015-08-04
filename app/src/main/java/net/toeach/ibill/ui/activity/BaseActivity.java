@@ -41,7 +41,7 @@ public abstract class BaseActivity extends TBaseActivity {
             mBtnBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finish();
+                    doBack();
                 }
             });
         }
@@ -83,7 +83,7 @@ public abstract class BaseActivity extends TBaseActivity {
                 showDialog("错误", e.getMessage());
                 break;
             case Constants.MSG_ERROR:// 应用错误信息
-                int errCode = (int)message.obj;
+                int errCode = (int) message.obj;
                 String errMsg = Constants.ERRORS.get(errCode);
                 showDialog("错误", errMsg);
                 break;
@@ -236,9 +236,16 @@ public abstract class BaseActivity extends TBaseActivity {
 
     public void onConnect() {
     }
+
     public void onDisconnect() {
     }
 
+    /**
+     * 返回按钮的点击事件
+     */
+    protected void doBack() {
+        finish();
+    }
     /**
      * 抽象方法，由子类来实现功能按钮的点击事件
      */

@@ -10,7 +10,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import net.toeach.ibill.R;
-import net.toeach.ibill.model.BillCategory;
 import net.toeach.ibill.model.CategoryIcon;
 
 /**
@@ -39,7 +38,7 @@ public class CategoryIconItemAdapter extends BaseArrayAdapter<CategoryIcon> {
         }
 
         CategoryIcon bean = getItem(position);
-        if(bean != null) {
+        if (bean != null) {
             holder.icon.setImageResource(bean.getValue());
             holder.checkbox.setVisibility(bean.isChecked() ? View.VISIBLE : View.GONE);
         }

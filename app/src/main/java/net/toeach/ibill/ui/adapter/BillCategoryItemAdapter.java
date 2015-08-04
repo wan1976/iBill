@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,12 +15,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import net.toeach.ibill.Constants;
 import net.toeach.ibill.R;
 import net.toeach.ibill.model.BillCategory;
-import net.toeach.ibill.model.CategoryIcon;
 
 /**
  * 分类适配器
  */
 public class BillCategoryItemAdapter extends BaseArrayAdapter<BillCategory> {
+    private int mode;
+
     /**
      * 构造函数
      *
@@ -26,6 +29,10 @@ public class BillCategoryItemAdapter extends BaseArrayAdapter<BillCategory> {
      */
     public BillCategoryItemAdapter(Context context) {
         super(context, 0);
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 
     @Override
@@ -40,22 +47,35 @@ public class BillCategoryItemAdapter extends BaseArrayAdapter<BillCategory> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        BillCategory bean = getItem(position);
-        if(bean != null) {
+        final BillCategory bean = getItem(position);
+        if (bean != null) {
+            // 设置名称
             holder.name.setText(bean.getName());
+            // 设置图标
             Integer value = Constants.CAT_ICONS.get(bean.getIcon());
-            if(value != null) {
+            if (value != null) {
                 int icon = value.intValue();
                 holder.icon.setImageResource(icon);
             }
+            // 设置选中状态
+            holder.checkBox.setVisibility(mode == 1 ? View.VISIBLE : View.GONE);
+            holder.checkBox.setChecked(bean.isChecked());
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    bean.setChecked(isChecked);
+                }
+            });
         }
         return convertView;
     }
 
-    static class ViewHolder {
+    public static class ViewHolder {
         @ViewInject(R.id.cat_icon)
-        ImageView icon;// 图标
+        public ImageView icon;// 图标
         @ViewInject(R.id.cat_name)
-        TextView name;// 名称
+        public TextView name;// 名称
+        @ViewInject(R.id.checkbox)
+        public CheckBox checkBox;// 选择框
     }
 }

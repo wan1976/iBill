@@ -13,12 +13,17 @@
 
     <string name="category_list_title">分类设置</string>
     <string name="category_list_empty">暂无数据</string>
+    <string name="category_list_confirm_del">是否要删除记录？</string>
+    <string name="category_list_del_success">删除成功</string>
     <string name="category_add_title">新增分类</string>
     <string name="category_modify_title">编辑分类</string>
     <string name="category_modify_name">名称</string>
     <string name="category_modify_name_hint">2-10个字符</string>
     <string name="category_modify_icon">图标</string>
     <string name="category_modify_save_success">保存成功</string>
+
+    <string name="button_yes">是</string>
+    <string name="button_no">否</string>
 
     <string name="err_1001">账单id不能为0</string>
     <string name="err_1002">附件URI不能为空</string>

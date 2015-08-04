@@ -1,12 +1,12 @@
 package net.toeach.base;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.List;
-
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * 群组数据库访问对象 <br/>
@@ -58,6 +58,16 @@ public class TBaseDao<T> {
 	 */
 	public void delete(int id) throws DbException {
 		db.deleteById(clazz, id);
+	}
+
+	/**
+	 * 删除实体对象
+	 *
+	 * @param list 实体对象
+	 * @throws DbException 异常对象
+	 */
+	public void delete(List<T> list) throws DbException {
+		db.deleteAll(list);
 	}
 	
 	/**

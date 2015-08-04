@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
     <!--标题-->
     <include layout="@layout/inc_title_layout"/>
     <!--分类管理-->
@@ -11,23 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/panel_white">
+        android:paddingTop="10dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_category"/>
+
         <TextView
+            style="@style/AppTheme.UI.PannelText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:text="@string/setting_pannel_category"
-            style="@style/AppTheme.UI.PannelText"/>
+            android:layout_weight="1"
+            android:text="@string/setting_pannel_category"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,23 +43,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/panel_white">
+        android:paddingTop="10dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_feedback"/>
+
         <TextView
+            style="@style/AppTheme.UI.PannelText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:text="@string/setting_pannel_feedback"
-            style="@style/AppTheme.UI.PannelText"/>
+            android:layout_weight="1"
+            android:text="@string/setting_pannel_feedback"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,23 +74,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/panel_white">
+        android:paddingTop="10dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_help"/>
+
         <TextView
+            style="@style/AppTheme.UI.PannelText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:text="@string/setting_pannel_help"
-            style="@style/AppTheme.UI.PannelText"/>
+            android:layout_weight="1"
+            android:text="@string/setting_pannel_help"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,23 +105,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/panel_white">
+        android:paddingTop="10dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_about"/>
+
         <TextView
+            style="@style/AppTheme.UI.PannelText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:text="@string/setting_pannel_about"
-            style="@style/AppTheme.UI.PannelText"/>
+            android:layout_weight="1"
+            android:text="@string/setting_pannel_about"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -144,6 +144,7 @@ public class IBillApplication extends Application {
         Constants.CAT_ICONS.put("ic_cat_019", R.mipmap.ic_cat_19);
         Constants.CAT_ICONS.put("ic_cat_020", R.mipmap.ic_cat_20);
     }
+
     /**
      * 初始化系统错误数组
      */

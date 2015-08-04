@@ -1,6 +1,5 @@
 package net.toeach.ibill;
 
-import java.util.LinkedHashSet;
 import java.util.Map;
 
 /**

@@ -39,18 +39,20 @@ public class BillCategoryManager extends BaseManager {
 
     /**
      * 保存数据
-     * @param mode 0:新增，1:编辑
-     * @param bean 分类对象
+     *
+     * @param mode    0:新增，1:编辑
+     * @param bean    分类对象
      * @param handler Handler对象
      */
     public void save(int mode, BillCategory bean, Handler handler) {
         LogUtils.d(bean.toString());
-        if(mode == 0) {
+        if (mode == 0) {
             add(bean, handler);
-        } else if(mode == 1){
+        } else if (mode == 1) {
             modify(bean, handler);
         }
     }
+
     /**
      * 增加分类
      *
@@ -111,14 +113,14 @@ public class BillCategoryManager extends BaseManager {
     }
 
     /**
-     * 删除分类
+     * 批量删除分类
      *
-     * @param bean    分类对象
+     * @param list    分类对象列表
      * @param handler Handler对象
      */
-    public void delete(BillCategory bean, Handler handler) {
+    public void delete(List<BillCategory> list, Handler handler) {
         try {
-            dao.delete(bean.getId());// 删除数据
+            dao.delete(list);// 删除数据
             handleMessage(handler, MSG_DEL_SUCCESS);// 发送消息通知UI
         } catch (DbException e) {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误

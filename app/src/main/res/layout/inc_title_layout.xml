@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
     android:id="@+id/layer_title"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@mipmap/ic_title_bg">
@@ -14,10 +15,10 @@
     <!--标题文字-->
     <TextView
         android:id="@+id/txt_title"
+        style="@style/AppTheme.UI.TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        style="@style/AppTheme.UI.TitleText"/>
+        android:layout_gravity="center"/>
     <!--功能按钮-->
     <ImageView
         android:id="@+id/btn_func"

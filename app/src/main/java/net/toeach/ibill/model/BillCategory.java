@@ -25,6 +25,9 @@ public class BillCategory {
     @Column(column = "cat_icon")
     private String icon;// 分类图标
 
+    @Transient
+    private boolean checked;// 选中状态
+
     public int getId() {
         return id;
     }
@@ -49,12 +52,21 @@ public class BillCategory {
         this.icon = icon;
     }
 
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
     @Override
     public String toString() {
         return "BillCategory{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", icon='" + icon + '\'' +
+                ", checked='" + checked + '\'' +
                 '}';
     }
 }

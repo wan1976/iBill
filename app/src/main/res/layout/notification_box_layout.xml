@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:background="@mipmap/ic_warnbox_bg">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@mipmap/ic_warnbox_bg"
+              android:gravity="center">
 
     <ImageView
         android:id="@+id/logo"
@@ -15,10 +15,10 @@
 
     <TextView
         android:id="@+id/message"
+        style="@style/AppTheme.UI.NotificationBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        style="@style/AppTheme.UI.NotificationBox"/>
+        android:layout_weight="1"/>
 </LinearLayout>

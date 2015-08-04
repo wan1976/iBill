@@ -22,12 +22,9 @@ import net.toeach.ibill.ui.adapter.CategoryIconItemAdapter;
 import net.toeach.widget.CustomGridView;
 
 import org.parceler.Parcels;
-import org.parceler.apache.commons.lang.ArrayUtils;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
@@ -68,12 +65,12 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
 
     @Override
     public void doFunction() {
-        if(mMode == 0) {// 新建模式
+        if (mMode == 0) {// 新建模式
             mCategory = new BillCategory();
         }
 
         mCategory.setName(mTxtName.getText().toString());// 名称
-        if(mIcon != null) {// 图标
+        if (mIcon != null) {// 图标
             mCategory.setIcon(mIcon.getName());
         }
         // 提交保存数据
@@ -140,7 +137,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
         mGridIcon.setOnItemClickListener(this);
         mAdapter = new CategoryIconItemAdapter(this);
 
-        int i=0;
+        int i = 0;
         // 对Key进行排序
         LinkedList<String> keySet = new LinkedList<String>(Constants.CAT_ICONS.keySet());
         Collections.sort(keySet);
@@ -148,7 +145,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
             CategoryIcon bean = new CategoryIcon();
             bean.setName(key);
             bean.setValue(Constants.CAT_ICONS.get(key));
-            if((mMode == 0 && i==0) ||// 新增模式下，默认选中第一个
+            if ((mMode == 0 && i == 0) ||// 新增模式下，默认选中第一个
                     (mMode == 1 && bean.getName().equals(mCategory.getIcon()))) {// 编辑模式下，选中对应的分类
                 bean.setChecked(true);
             }
@@ -160,6 +157,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
 
     /**
      * 校验是否正确的分类名称
+     *
      * @param name
      */
     private void validateName(String name) {
@@ -169,19 +167,21 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
             return;
         }
         int length = name.length();
-        if (length<2 || length>10) {// 2-10个字符长度
+        if (length < 2 || length > 10) {// 2-10个字符长度
             disableButtonSave();
             return;
         }
 
         enableButtonSave();
     }
+
     /**
      * 设置保存按钮可用
      */
     private void enableButtonSave() {
         showFuncButton();
     }
+
     /**
      * 设置保存按钮禁用
      */

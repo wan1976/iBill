@@ -6,18 +6,8 @@ import java.util.Map;
  * EventBus事件对象.
  */
 public class BillEvent {
-    /**
-     * 事件类型定义
-     */
-    public enum EventType {
-        EVENT_NET_STAT_QUERY, // 网络状态查询
-        EVENT_NET_STAT_RESULT, // 网络状态查询结果
-        EVENT_RELOAD;// 重新加载数据
-    }
-
     private EventType eventType;// 事件类型
     private Map<String, ?> data;// 附带数据
-
     /**
      * 构造函数
      */
@@ -26,6 +16,7 @@ public class BillEvent {
 
     /**
      * 构造函数
+     *
      * @param eventType
      * @param data
      */
@@ -37,6 +28,7 @@ public class BillEvent {
     public EventType getEventType() {
         return eventType;
     }
+
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
@@ -44,6 +36,7 @@ public class BillEvent {
     public Map<String, ?> getData() {
         return data;
     }
+
     public void setData(Map<String, Object> data) {
         this.data = data;
     }
@@ -54,5 +47,14 @@ public class BillEvent {
                 "eventType=" + eventType +
                 ", data=" + data +
                 '}';
+    }
+
+    /**
+     * 事件类型定义
+     */
+    public enum EventType {
+        EVENT_NET_STAT_QUERY, // 网络状态查询
+        EVENT_NET_STAT_RESULT, // 网络状态查询结果
+        EVENT_RELOAD;// 重新加载数据
     }
 }
