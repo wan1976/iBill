@@ -15,18 +15,18 @@ import org.parceler.Parcel;
 public class BillCategory {
     @JSONField(name = "id")
     @Column(column = "_id")
-    private int id;// 标识
+    int id;// 标识
 
     @JSONField(name = "cat_name")
     @Column(column = "cat_name")
-    private String name;// 分类名称
+    String name;// 分类名称
 
     @JSONField(name = "cat_icon")
     @Column(column = "cat_icon")
-    private String icon;// 分类图标
+    String icon;// 分类图标
 
     @Transient
-    private boolean checked;// 选中状态
+    boolean checked;// 选中状态
 
     public int getId() {
         return id;

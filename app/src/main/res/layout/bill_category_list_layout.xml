@@ -14,6 +14,7 @@
         android:background="@color/panel_white"
         android:divider="#f2f2f2"
         android:dividerHeight="1px"
+        android:listSelector="@drawable/panel_white"
         android:visibility="gone"/>
 
     <TextView
