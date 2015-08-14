@@ -5,11 +5,11 @@ import org.parceler.Parcel;
 /**
  * 分类图标
  */
-@Parcel
+@Parcel(Parcel.Serialization.BEAN)
 public class CategoryIcon {
-    String name;// 分类名称
-    int value;// 分类图标
-    boolean checked;// 是否选中
+    private String name;// 分类名称
+    private int value;// 分类图标
+    private boolean checked;// 是否选中
 
     public String getName() {
         return name;

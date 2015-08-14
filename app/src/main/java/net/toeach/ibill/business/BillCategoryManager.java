@@ -118,9 +118,9 @@ public class BillCategoryManager extends BaseManager {
      * @param list    分类对象列表
      * @param handler Handler对象
      */
-    public void delete(List<BillCategory> list, Handler handler) {
+    public void deleteAll(List<BillCategory> list, Handler handler) {
         try {
-            dao.delete(list);// 删除数据
+            dao.deleteAll(list);// 删除数据
             handleMessage(handler, MSG_DEL_SUCCESS);// 发送消息通知UI
         } catch (DbException e) {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误

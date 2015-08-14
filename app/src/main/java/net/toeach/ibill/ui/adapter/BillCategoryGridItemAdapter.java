@@ -17,29 +17,23 @@ import net.toeach.ibill.R;
 import net.toeach.ibill.model.BillCategory;
 
 /**
- * 分类适配器
+ * 分类网格适配器
  */
-public class BillCategoryItemAdapter extends BaseArrayAdapter<BillCategory> {
-    private int mode;
-
+public class BillCategoryGridItemAdapter extends BaseArrayAdapter<BillCategory> {
     /**
      * 构造函数
      *
      * @param context
      */
-    public BillCategoryItemAdapter(Context context) {
+    public BillCategoryGridItemAdapter(Context context) {
         super(context, 0);
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bill_category_item_layout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bill_category_grid_item_layout, parent, false);
             holder = new ViewHolder();
             ViewUtils.inject(holder, convertView);
             convertView.setTag(holder);
@@ -58,7 +52,7 @@ public class BillCategoryItemAdapter extends BaseArrayAdapter<BillCategory> {
                 holder.icon.setImageResource(icon);
             }
             // 设置选中状态
-            holder.checkBox.setVisibility(mode == 1 ? View.VISIBLE : View.GONE);
+            holder.checkBox.setVisibility(bean.isChecked() ? View.VISIBLE : View.GONE);
             holder.checkBox.setChecked(bean.isChecked());
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -15,13 +17,13 @@ import net.toeach.ibill.model.CategoryIcon;
 /**
  * 分类图标适配器
  */
-public class CategoryIconItemAdapter extends BaseArrayAdapter<CategoryIcon> {
+public class CategoryIconGridItemAdapter extends BaseArrayAdapter<CategoryIcon> {
     /**
      * 构造函数
      *
      * @param context
      */
-    public CategoryIconItemAdapter(Context context) {
+    public CategoryIconGridItemAdapter(Context context) {
         super(context, 0);
     }
 
@@ -29,7 +31,7 @@ public class CategoryIconItemAdapter extends BaseArrayAdapter<CategoryIcon> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bill_category_icon_item_layout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bill_category_icon_grid_item_layout, parent, false);
             holder = new ViewHolder();
             ViewUtils.inject(holder, convertView);
             convertView.setTag(holder);
@@ -37,10 +39,17 @@ public class CategoryIconItemAdapter extends BaseArrayAdapter<CategoryIcon> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        CategoryIcon bean = getItem(position);
+        final CategoryIcon bean = getItem(position);
         if (bean != null) {
             holder.icon.setImageResource(bean.getValue());
-            holder.checkbox.setVisibility(bean.isChecked() ? View.VISIBLE : View.GONE);
+            holder.checkBox.setVisibility(bean.isChecked() ? View.VISIBLE : View.GONE);
+            holder.checkBox.setChecked(bean.isChecked());
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    bean.setChecked(isChecked);
+                }
+            });
         }
         return convertView;
     }
@@ -48,7 +57,7 @@ public class CategoryIconItemAdapter extends BaseArrayAdapter<CategoryIcon> {
     static class ViewHolder {
         @ViewInject(R.id.cat_icon)
         ImageView icon;// 图标
-        @ViewInject(R.id.cat_checkbox)
-        ImageView checkbox;// 选择框
+        @ViewInject(R.id.checkbox)
+        CheckBox checkBox;// 选择框
     }
 }

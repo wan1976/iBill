@@ -11,22 +11,22 @@ import org.parceler.Parcel;
  * 账单类型
  */
 @Table(name = "bill_category")
-@Parcel
+@Parcel(Parcel.Serialization.BEAN)
 public class BillCategory {
     @JSONField(name = "id")
     @Column(column = "_id")
-    int id;// 标识
+    private int id;// 标识
 
     @JSONField(name = "cat_name")
     @Column(column = "cat_name")
-    String name;// 分类名称
+    private String name;// 分类名称
 
     @JSONField(name = "cat_icon")
     @Column(column = "cat_icon")
-    String icon;// 分类图标
+    private String icon;// 分类图标
 
     @Transient
-    boolean checked;// 选中状态
+    private boolean checked;// 选中状态
 
     public int getId() {
         return id;

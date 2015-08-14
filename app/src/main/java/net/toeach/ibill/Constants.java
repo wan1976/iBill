@@ -16,6 +16,7 @@ public class Constants {
     public final static String KEY_MOBILE = "key_mobile";
     public final static String KEY_SECRET_KEY = "secretkey";
     public final static String SESSION_ID = "session_id";
+    public final static int PAGE_SIZE = 20;// 分页记录数据
 
     // 分类图标
     public static Map<String, Integer> CAT_ICONS;

@@ -40,7 +40,6 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public void doFunction() {
-
     }
 
     /**

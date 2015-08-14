@@ -18,7 +18,7 @@ import net.toeach.ibill.business.BillCategoryManager;
 import net.toeach.ibill.model.BillCategory;
 import net.toeach.ibill.model.BillEvent;
 import net.toeach.ibill.model.CategoryIcon;
-import net.toeach.ibill.ui.adapter.CategoryIconItemAdapter;
+import net.toeach.ibill.ui.adapter.CategoryIconGridItemAdapter;
 import net.toeach.widget.CustomGridView;
 
 import org.parceler.Parcels;
@@ -38,7 +38,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
     @ViewInject(R.id.cat_icon)
     private CustomGridView mGridIcon;// 图标
 
-    private CategoryIconItemAdapter mAdapter;// 图标适配器
+    private CategoryIconGridItemAdapter mAdapter;// 图标适配器
     private BillCategory mCategory;// 分类对象
     private CategoryIcon mIcon;// 选中的图标
     private int mMode;// 编辑模式，0:新建，1:修改
@@ -135,7 +135,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
         });
         // 图标GridView点击事件
         mGridIcon.setOnItemClickListener(this);
-        mAdapter = new CategoryIconItemAdapter(this);
+        mAdapter = new CategoryIconGridItemAdapter(this);
 
         int i = 0;
         // 对Key进行排序
@@ -148,6 +148,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
             if ((mMode == 0 && i == 0) ||// 新增模式下，默认选中第一个
                     (mMode == 1 && bean.getName().equals(mCategory.getIcon()))) {// 编辑模式下，选中对应的分类
                 bean.setChecked(true);
+                mIcon = bean;
             }
             mAdapter.add(bean);
             i++;

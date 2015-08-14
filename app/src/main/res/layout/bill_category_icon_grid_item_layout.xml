@@ -10,11 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"/>
 
-    <ImageView
-        android:id="@+id/cat_checkbox"
+
+    <CheckBox
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:src="@mipmap/ic_checkbox_checked"
+        android:button="@drawable/checkbox"
+        android:focusable="false"
         android:visibility="gone"/>
 </FrameLayout>

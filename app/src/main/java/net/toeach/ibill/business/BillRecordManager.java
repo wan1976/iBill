@@ -1,12 +1,13 @@
 package net.toeach.ibill.business;
 
 import android.os.Handler;
-import android.text.TextUtils;
 
 import com.lidroid.xutils.exception.DbException;
 
 import net.toeach.base.TException;
+import net.toeach.ibill.dao.BillCategoryDao;
 import net.toeach.ibill.dao.BillRecordDao;
+import net.toeach.ibill.model.BillCategory;
 import net.toeach.ibill.model.BillRecord;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class BillRecordManager extends BaseManager {
     public final static int MSG_SAVE_SUCCESS = 3001;// 保存成功
     public final static int MSG_DEL_SUCCESS = 3002;// 删除成功
+    public final static int MSG_LIST_SUCCESS = 3003;// 获取列表成功
 
 
     private static BillRecordManager instance = new BillRecordManager();
@@ -42,19 +44,15 @@ public class BillRecordManager extends BaseManager {
      * @param bean    附件对象
      * @param handler Handler对象
      */
-    public void add(BillRecord bean, Handler handler) {
-        if (bean.getCatId() == 0) {// 分类id不为0
-            handleError(handler, 1004);
-            return;
-        }
+    public void save(BillRecord bean, Handler handler) {
         if (bean.getCost() == 0) {// 金额不为0
             handleError(handler, 1005);
             return;
         }
-        if (TextUtils.isEmpty(bean.getMemo())) {// 备注不能为空
-            handleError(handler, 1006);
-            return;
-        }
+//        if (TextUtils.isEmpty(bean.getMemo())) {// 备注不能为空
+//            handleError(handler, 1006);
+//            return;
+//        }
 
         try {
             dao.save(bean);// 保存数据
@@ -65,15 +63,55 @@ public class BillRecordManager extends BaseManager {
     }
 
     /**
-     * 删除账单记录
+     * 账单记录
      *
-     * @param bean    账单记录对象
+     * @param id    账单记录对象表示
      * @param handler Handler对象
      */
-    public void delete(BillRecord bean, Handler handler) {
+    public void deleteById(int id, Handler handler) {
         try {
-            dao.delete(bean.getId());// 删除数据
+            dao.deleteById(id);// 删除数据
             handleMessage(handler, MSG_DEL_SUCCESS);// 发送消息通知UI
+        } catch (DbException e) {
+            handleException(handler, new TException("Database occurs error."));// 抛出系统错误
+        }
+    }
+
+    /**
+     * 批量账单记录
+     *
+     * @param list    账单记录对象列表
+     * @param handler Handler对象
+     */
+    public void deleteAll(List<BillRecord> list, Handler handler) {
+        try {
+            dao.deleteAll(list);// 删除数据
+            handleMessage(handler, MSG_DEL_SUCCESS);// 发送消息通知UI
+        } catch (DbException e) {
+            handleException(handler, new TException("Database occurs error."));// 抛出系统错误
+        }
+    }
+
+    /**
+     * 获取账单记录
+     *
+     * @param pageNo   分页号
+     * @param pageSize 分页数据大小
+     * @param handler  Handler对象
+     */
+    public void getList(int pageNo, int pageSize, Handler handler) {
+        try {
+            List<BillRecord> list = dao.getList(pageNo, pageSize);// 获取账单记录列表
+            if (list != null) {
+                for (BillRecord bean : list) {
+                    BillCategory cat = BillCategoryDao.getInstance().findById(bean.getCatId());
+                    if (cat != null) {
+                        bean.setCatName(cat.getName());
+                        bean.setCatIcon(cat.getIcon());
+                    }
+                }
+            }
+            handleMessage(handler, MSG_LIST_SUCCESS, list);// 发送消息通知UI
         } catch (DbException e) {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误
         }
@@ -90,7 +128,16 @@ public class BillRecordManager extends BaseManager {
     public void getList(int catId, int pageNo, int pageSize, Handler handler) {
         try {
             List<BillRecord> list = dao.getList(catId, pageNo, pageSize);// 获取账单记录列表
-            handleMessage(handler, MSG_DEL_SUCCESS, list);// 发送消息通知UI
+            if (list != null) {
+                for (BillRecord bean : list) {
+                    BillCategory cat = BillCategoryDao.getInstance().findById(bean.getCatId());
+                    if (cat != null) {
+                        bean.setCatName(cat.getName());
+                        bean.setCatIcon(cat.getIcon());
+                    }
+                }
+            }
+            handleMessage(handler, MSG_LIST_SUCCESS, list);// 发送消息通知UI
         } catch (DbException e) {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误
         }

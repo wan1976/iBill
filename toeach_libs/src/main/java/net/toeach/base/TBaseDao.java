@@ -56,7 +56,7 @@ public class TBaseDao<T> {
 	 * @param id 数据标识
 	 * @throws DbException 异常对象
 	 */
-	public void delete(int id) throws DbException {
+	public void deleteById(int id) throws DbException {
 		db.deleteById(clazz, id);
 	}
 
@@ -66,7 +66,7 @@ public class TBaseDao<T> {
 	 * @param list 实体对象
 	 * @throws DbException 异常对象
 	 */
-	public void delete(List<T> list) throws DbException {
+	public void deleteAll(List<T> list) throws DbException {
 		db.deleteAll(list);
 	}
 	
@@ -78,5 +78,15 @@ public class TBaseDao<T> {
 	public List<T> getList(String orderBy, boolean desc) throws DbException {
 		Selector selector = Selector.from(clazz).orderBy(orderBy, desc);
 		return db.findAll(selector);
+	}
+
+	/**
+	 * 获取对象
+	 *
+	 * @param id 对象表示
+	 * @throws DbException 异常对象
+	 */
+	public T findById(int id) throws DbException {
+		return db.findById(clazz, id);
 	}
 }

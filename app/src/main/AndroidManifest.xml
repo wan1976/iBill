@@ -39,6 +39,10 @@
         <activity
             android:name=".ui.activity.BillCategoryModifyActivity"
             android:screenOrientation="portrait"/>
+        <!--明细添加/修改界面-->
+        <activity
+            android:name=".ui.activity.BillRecordModifyActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

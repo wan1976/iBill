@@ -70,9 +70,9 @@ public class AttachmentManager extends BaseManager {
      * @param bean    附件对象
      * @param handler Handler对象
      */
-    public void delete(Attachment bean, Handler handler) {
+    public void deleteById(Attachment bean, Handler handler) {
         try {
-            dao.delete(bean.getId());// 删除数据
+            dao.deleteById(bean.getId());// 删除数据
             handleMessage(handler, MSG_DEL_SUCCESS);// 发送消息通知UI
         } catch (DbException e) {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误

@@ -1,12 +1,20 @@
 package net.toeach.ibill.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lidroid.xutils.util.LogUtils;
+
 import net.toeach.base.TBaseFragment;
+import net.toeach.base.TException;
+import net.toeach.common.utils.BusProvider;
 import net.toeach.ibill.Constants;
 import net.toeach.ibill.R;
+import net.toeach.ibill.model.BillEvent;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Fragment基类
@@ -16,18 +24,23 @@ public abstract class BaseFragment extends TBaseFragment {
     protected View mBtnBack;// 返回按钮
     protected TextView mTitle;// 标题文字
     protected View mBtnFunc;// 功能按钮
+    protected EventBus mBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initSharedPreferences(Constants.KEY_PREF_NAME);
         initProgressDialog();
+
+        mBus = BusProvider.getInstance();
+        mBus.register(this);//注册
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         dismissProgressDialog();
+        mBus.unregister(this);//注销
     }
 
     /**
@@ -137,6 +150,60 @@ public abstract class BaseFragment extends TBaseFragment {
 //        if (mProgressDialog != null && mProgressDialog.isShowing()) {
 //            mProgressDialog.dismiss();
 //        }
+    }
+
+    /**
+     * 弹出对话框
+     *
+     * @param title   标题
+     * @param message 信息提示
+     */
+    protected void showDialog(String title, String message) {
+        LogUtils.d("title:" + title + ", message:" + message);
+        showToast(message);
+    }
+
+    public void onEvent(BillEvent event) {
+        if (event == null) {
+            return;
+        }
+        LogUtils.d(event.toString());
+
+        // 获取事件类型
+        BillEvent.EventType eventType = event.getEventType();
+        // 网络状态查询结果
+        if (eventType.equals(BillEvent.EventType.EVENT_NET_STAT_RESULT)) {
+            // 网络状态
+            int state = (Integer) event.getData().get("state");
+            if (state == 1) {// 网络断开
+                onDisconnect();
+            } else {
+                onConnect();
+            }
+        }
+    }
+
+    public void onConnect() {
+    }
+
+    public void onDisconnect() {
+    }
+
+
+    @Override
+    public void handleMessage(Message message) {
+        switch (message.what) {
+            case Constants.MSG_EXCEPTION:// 系统异常信息
+                /* 提示错误 */
+                TException e = (TException) message.obj;
+                showDialog("错误", e.getMessage());
+                break;
+            case Constants.MSG_ERROR:// 应用错误信息
+                int errCode = (int) message.obj;
+                String errMsg = Constants.ERRORS.get(errCode);
+                showDialog("错误", errMsg);
+                break;
+        }
     }
 
     /**

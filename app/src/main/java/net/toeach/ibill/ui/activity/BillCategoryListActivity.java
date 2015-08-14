@@ -18,7 +18,7 @@ import net.toeach.ibill.R;
 import net.toeach.ibill.business.BillCategoryManager;
 import net.toeach.ibill.model.BillCategory;
 import net.toeach.ibill.model.BillEvent;
-import net.toeach.ibill.ui.adapter.BillCategoryItemAdapter;
+import net.toeach.ibill.ui.adapter.BillCategoryListItemAdapter;
 
 import org.parceler.Parcels;
 
@@ -37,7 +37,7 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
     @ViewInject(R.id.empty_view)
     private TextView mEmptyView;// 无数据提示
 
-    private BillCategoryItemAdapter mAdapter;// 适配器
+    private BillCategoryListItemAdapter mAdapter;// 适配器
     private int mMode;// 0:浏览模式，1:删除模式
 
     @Override
@@ -57,7 +57,7 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
                 intent.putExtra("cat", wrapped);
                 startActivity(intent);
             } else {// 删除模式，点击勾选记录
-                BillCategoryItemAdapter.ViewHolder viewHolder = (BillCategoryItemAdapter.ViewHolder) view.getTag();
+                BillCategoryListItemAdapter.ViewHolder viewHolder = (BillCategoryListItemAdapter.ViewHolder) view.getTag();
                 viewHolder.checkBox.toggle();
                 bean.setChecked(viewHolder.checkBox.isChecked());
             }
@@ -178,7 +178,8 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
     private void init() {
         setTitleValue(R.string.category_list_title);// 设置标题名称
         setFuncButton(R.drawable.button_add);// 设置功能按钮
-        mAdapter = new BillCategoryItemAdapter(this);
+
+        mAdapter = new BillCategoryListItemAdapter(this);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
         mListView.setOnItemLongClickListener(this);
@@ -239,7 +240,7 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
         new Thread(new Runnable() {
             @Override
             public void run() {
-                BillCategoryManager.getInstance().delete(list, handler);
+                BillCategoryManager.getInstance().deleteAll(list, handler);
             }
         }).start();
     }

@@ -5,16 +5,16 @@ import com.lidroid.xutils.db.annotation.Column;
 import com.lidroid.xutils.db.annotation.Table;
 import com.lidroid.xutils.db.annotation.Transient;
 
+import org.parceler.Parcel;
+
 import java.util.Date;
-import java.util.List;
 
 /**
  * 账单详细记录
  */
 @Table(name = "bill_record")
+@Parcel(Parcel.Serialization.BEAN)
 public class BillRecord {
-    @Transient// Transient使这个列被忽略，不存入数据库
-    public List<Attachment> attachments;// 附件列表
     @JSONField(name = "id")
     @Column(column = "_id")
     private int id;// 标识
@@ -27,9 +27,16 @@ public class BillRecord {
     @JSONField(name = "memo")
     @Column(column = "memo")
     private String memo;// 备注
+    @JSONField(name = "bill_date")
+    @Column(column = "bill_date")
+    private Date billDate;// 账单发生日期
     @JSONField(name = "create_time")
     @Column(column = "create_time")
     private Date createTime;// 记录时间
+    @Transient
+    private String catName;// 分类名称
+    @Transient
+    private String catIcon;// 分类图标
 
     public int getId() {
         return id;
@@ -71,6 +78,30 @@ public class BillRecord {
         this.createTime = createTime;
     }
 
+    public String getCatName() {
+        return catName;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
+
+    public String getCatIcon() {
+        return catIcon;
+    }
+
+    public void setCatIcon(String catIcon) {
+        this.catIcon = catIcon;
+    }
+
+    public Date getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
+    }
+
     @Override
     public String toString() {
         return "BillRecord{" +
@@ -78,7 +109,10 @@ public class BillRecord {
                 ", catId=" + catId +
                 ", cost=" + cost +
                 ", memo='" + memo + '\'' +
+                ", billDate=" + billDate +
                 ", createTime=" + createTime +
+                ", catName='" + catName + '\'' +
+                ", catIcon='" + catIcon + '\'' +
                 '}';
     }
 }
