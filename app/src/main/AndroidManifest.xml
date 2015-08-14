@@ -2,7 +2,9 @@
 <manifest
     package="net.toeach.ibill"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <supports-screens
         android:largeScreens="true"
@@ -42,6 +44,14 @@
         <!--明细添加/修改界面-->
         <activity
             android:name=".ui.activity.BillRecordModifyActivity"
+            android:screenOrientation="portrait"/>
+        <!--关于界面-->
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:screenOrientation="portrait"/>
+        <!--帮助界面-->
+        <activity
+            android:name=".ui.activity.HelpActivity"
             android:screenOrientation="portrait"/>
     </application>
 
