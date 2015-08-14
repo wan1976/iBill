@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * 账单清单界面
  */
-public class BillRecordFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class BillRecordFragment extends BaseFragment implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
     @ViewInject(R.id.record_list)
     private ListView mListView;// 分类列表
     @ViewInject(R.id.empty_view)
@@ -43,10 +44,8 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.record_fragment_layout, container, false);
         ViewUtils.inject(this, view);
-
         initView(view);
         init();
-
         return view;
     }
 
@@ -63,21 +62,30 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
     }
 
     @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        // 当不滚动时
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+            // 判断是否滚动到底部
+            if (view.getLastVisiblePosition() == view.getCount() - 1) {
+                LogUtils.d("listview load more data");
+                //加载更多功能的数据
+                mPageNo++;
+                loadData();
+            }
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    }
+
+    @Override
     public void handleMessage(Message message) {
         super.handleMessage(message);
         switch (message.what) {
             case BillRecordManager.MSG_LIST_SUCCESS:
                 List<BillRecord> list = (List<BillRecord>) message.obj;
-                if (list != null && list.size() > 0) {
-                    mAdapter.clear();
-                    mAdapter.addAll(list);
-                    mAdapter.notifyDataSetChanged();
-                    mEmptyView.setVisibility(View.GONE);
-                    mListView.setVisibility(View.VISIBLE);
-                } else {
-                    mEmptyView.setVisibility(View.VISIBLE);
-                    mListView.setVisibility(View.GONE);
-                }
+                showListView(list);
                 break;
         }
     }
@@ -90,6 +98,8 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
         mAdapter = new BillRecordListItemAdapter(getActivity());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
+        mListView.setOnScrollListener(this);
+        mPageNo = 0;
         loadData();
     }
 
@@ -114,6 +124,7 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
         BillEvent.EventType eventType = event.getEventType();
         // 重新加载数据
         if (eventType.equals(BillEvent.EventType.EVENT_RELOAD)) {
+            mPageNo = 0;
             loadData();
         }
 
@@ -130,5 +141,31 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
                 BillRecordManager.getInstance().getList(mPageNo, Constants.PAGE_SIZE, handler);
             }
         }).start();
+    }
+
+    /**
+     * 显示列表数据
+     *
+     * @param list
+     */
+    private void showListView(List<BillRecord> list) {
+        LogUtils.d("page_no:" + mPageNo + ", adapter:" + mAdapter.getCount());
+        if (list != null && list.size() > 0) {
+            LogUtils.d("list is not null, size:" + list.size());
+            if (mPageNo == 0) {// 加载第一页数据
+                mAdapter.clear();
+            }
+            mAdapter.addAll(list);
+            mEmptyView.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
+        } else {// 返回的结果为空
+            LogUtils.d("list is null");
+            if (mAdapter.getCount() == 0) {// 当前列表为空，则显示无数据提示
+                mEmptyView.setVisibility(View.VISIBLE);
+                mListView.setVisibility(View.GONE);
+            } else {
+                mPageNo--;
+            }
+        }
     }
 }

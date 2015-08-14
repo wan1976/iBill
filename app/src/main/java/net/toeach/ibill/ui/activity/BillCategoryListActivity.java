@@ -94,10 +94,11 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
             case BillCategoryManager.MSG_LIST_SUCCESS:
                 List<BillCategory> list = (List<BillCategory>) message.obj;
                 if (list != null && list.size() > 0) {
+                    mAdapter.setMode(mMode);
                     mAdapter.clear();
                     mAdapter.addAll(list);
-                    mAdapter.setMode(mMode);
                     mAdapter.notifyDataSetChanged();
+
                     mEmptyView.setVisibility(View.GONE);
                     mListView.setVisibility(View.VISIBLE);
                 } else {

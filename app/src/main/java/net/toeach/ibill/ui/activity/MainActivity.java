@@ -2,6 +2,7 @@ package net.toeach.ibill.ui.activity;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -74,20 +75,22 @@ public class MainActivity extends BaseActivity {
      */
     @OnClick({R.id.tab_1, R.id.tab_2, R.id.tab_3})
     private void onTabItemClicked(View view) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         resetTabItem();
         switch (view.getId()) {
             case R.id.tab_1:
                 mTabItem1.setSelected(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, mFragment1).commit();
+                ft.replace(R.id.fragment_content, mFragment1);
                 break;
             case R.id.tab_2:
                 mTabItem2.setSelected(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, mFragment2).commit();
+                ft.replace(R.id.fragment_content, mFragment2);
                 break;
             case R.id.tab_3:
                 mTabItem3.setSelected(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, mFragment3).commit();
+                ft.replace(R.id.fragment_content, mFragment3);
                 break;
         }
+        ft.commit();
     }
 }

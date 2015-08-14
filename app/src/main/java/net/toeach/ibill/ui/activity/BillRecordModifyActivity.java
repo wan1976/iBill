@@ -300,9 +300,11 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
     @OnClick(R.id.bill_date)
     private void onButtonDateClicked(View view) {
         Calendar c = Calendar.getInstance();
+        // 如果编辑模式，则设置日期选择控件初始数据为对应明细的日期
         if (mRecord != null) {
             c.setTime(mRecord.getBillDate());
         }
+        // 弹出日期选择框
         DatePickerDialog dialog = new DatePickerDialog(this,
                 mDateListener,
                 c.get(Calendar.YEAR),

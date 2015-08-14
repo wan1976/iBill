@@ -11,7 +11,9 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import net.toeach.ibill.R;
+import net.toeach.ibill.ui.activity.AboutActivity;
 import net.toeach.ibill.ui.activity.BillCategoryListActivity;
+import net.toeach.ibill.ui.activity.HelpActivity;
 
 /**
  * 设置界面
@@ -50,16 +52,23 @@ public class SettingFragment extends BaseFragment {
     @OnClick({R.id.btn_category, R.id.btn_feedback, R.id.btn_help, R.id.btn_about})
     private void onPanelItemClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_category:
+            case R.id.btn_category: {
                 Intent i = new Intent(getActivity(), BillCategoryListActivity.class);
                 getActivity().startActivity(i);
                 break;
+            }
             case R.id.btn_feedback:
                 break;
-            case R.id.btn_help:
+            case R.id.btn_help: {
+                Intent i = new Intent(getActivity(), HelpActivity.class);
+                getActivity().startActivity(i);
                 break;
-            case R.id.btn_about:
+            }
+            case R.id.btn_about: {
+                Intent i = new Intent(getActivity(), AboutActivity.class);
+                getActivity().startActivity(i);
                 break;
+            }
         }
     }
 }
