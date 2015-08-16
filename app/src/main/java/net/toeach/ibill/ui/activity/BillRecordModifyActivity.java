@@ -191,8 +191,9 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
         mRecord = Parcels.unwrap(getIntent().getParcelableExtra("record"));
         if (mRecord != null) {
             mMode = 1;// 编辑模式
-            mTxtCost.setText(String.valueOf(mRecord.getCost()));
-            mTxtCost.setSelection(mTxtCost.getText().length());
+            String cost = String.valueOf(mRecord.getCost());
+            mTxtCost.setText(cost);
+            mTxtCost.setSelection(cost.length());
             try {
                 mTxtDate.setText(DateUtil.formatPatternDate(mRecord.getBillDate(), "yyyy-M-d"));
             } catch (Exception e) {
