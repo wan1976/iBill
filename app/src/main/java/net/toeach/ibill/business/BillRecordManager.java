@@ -13,7 +13,7 @@ import net.toeach.ibill.model.BillRecord;
 import java.util.List;
 
 /**
- * 账单记录业务类
+ * 费用明细记录业务类
  */
 public class BillRecordManager extends BaseManager {
     public final static int MSG_SAVE_SUCCESS = 3001;// 保存成功
@@ -39,9 +39,9 @@ public class BillRecordManager extends BaseManager {
     }
 
     /**
-     * 增加账单记录
+     * 增加费用明细记录
      *
-     * @param bean    附件对象
+     * @param bean    费用明细对象
      * @param handler Handler对象
      */
     public void save(BillRecord bean, Handler handler) {
@@ -63,9 +63,9 @@ public class BillRecordManager extends BaseManager {
     }
 
     /**
-     * 账单记录
+     * 删除费用明细记录
      *
-     * @param id    账单记录对象表示
+     * @param id    费用明细记录对象表示
      * @param handler Handler对象
      */
     public void deleteById(int id, Handler handler) {
@@ -78,9 +78,9 @@ public class BillRecordManager extends BaseManager {
     }
 
     /**
-     * 批量账单记录
+     * 批量删除费用明细记录
      *
-     * @param list    账单记录对象列表
+     * @param list    费用明细记录对象列表
      * @param handler Handler对象
      */
     public void deleteAll(List<BillRecord> list, Handler handler) {
@@ -93,7 +93,7 @@ public class BillRecordManager extends BaseManager {
     }
 
     /**
-     * 获取账单记录
+     * 获取费用明细记录
      *
      * @param pageNo   分页号
      * @param pageSize 分页数据大小
@@ -101,7 +101,7 @@ public class BillRecordManager extends BaseManager {
      */
     public void getList(int pageNo, int pageSize, Handler handler) {
         try {
-            List<BillRecord> list = dao.getList(pageNo, pageSize);// 获取账单记录列表
+            List<BillRecord> list = dao.getList(pageNo, pageSize);// 获取费用明细记录列表
             if (list != null) {
                 for (BillRecord bean : list) {
                     BillCategory cat = BillCategoryDao.getInstance().findById(bean.getCatId());
