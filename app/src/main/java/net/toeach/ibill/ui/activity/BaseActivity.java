@@ -159,7 +159,7 @@ public abstract class BaseActivity extends TBaseActivity {
     protected void initProgressDialog() {
         // 初始化对话框
         mProgressDialog = new CustomProgressBar(this);
-        mProgressDialog.setCancelable(true);
+        mProgressDialog.setCancelable(false);
     }
 
     /**

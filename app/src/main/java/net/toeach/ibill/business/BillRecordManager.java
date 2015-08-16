@@ -116,30 +116,4 @@ public class BillRecordManager extends BaseManager {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误
         }
     }
-
-    /**
-     * 获取账单记录
-     *
-     * @param catId    分类id
-     * @param pageNo   分页号
-     * @param pageSize 分页数据大小
-     * @param handler  Handler对象
-     */
-    public void getList(int catId, int pageNo, int pageSize, Handler handler) {
-        try {
-            List<BillRecord> list = dao.getList(catId, pageNo, pageSize);// 获取账单记录列表
-            if (list != null) {
-                for (BillRecord bean : list) {
-                    BillCategory cat = BillCategoryDao.getInstance().findById(bean.getCatId());
-                    if (cat != null) {
-                        bean.setCatName(cat.getName());
-                        bean.setCatIcon(cat.getIcon());
-                    }
-                }
-            }
-            handleMessage(handler, MSG_LIST_SUCCESS, list);// 发送消息通知UI
-        } catch (DbException e) {
-            handleException(handler, new TException("Database occurs error."));// 抛出系统错误
-        }
-    }
 }

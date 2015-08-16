@@ -32,11 +32,11 @@ public class BillRecordDao extends TBaseDao<BillRecord> {
     }
 
     /**
-     * 获取分类下的账单对象
+     * 获取费用明细对象
      *
      * @param pageNo   分页号
      * @param pageSize 分页数据大小
-     * @return 账单列表
+     * @return 费用明细列表
      * @throws DbException 异常
      */
     public List<BillRecord> getList(int pageNo, int pageSize) throws DbException {
@@ -48,20 +48,16 @@ public class BillRecordDao extends TBaseDao<BillRecord> {
     }
 
     /**
-     * 获取分类下的账单对象
+     * 获取分类下的费用明细对象
      *
      * @param catId    分类id
-     * @param pageNo   分页号
-     * @param pageSize 分页数据大小
-     * @return 账单列表
+     * @return 费用明细列表
      * @throws DbException 异常
      */
-    public List<BillRecord> getList(int catId, int pageNo, int pageSize) throws DbException {
+    public List<BillRecord> getList(int catId) throws DbException {
         Selector selector = Selector.from(BillRecord.class)
                 .where("cat_id", "=", catId)
-                .orderBy("bill_date", true)
-                .limit(pageSize)
-                .offset(pageSize * pageNo);
+                .orderBy("bill_date", true);
         return db.findAll(selector);
     }
 }

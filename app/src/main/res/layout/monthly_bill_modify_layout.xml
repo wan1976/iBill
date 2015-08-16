@@ -38,6 +38,7 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="@color/transparent"
-            android:hint="@string/bill_modify_name_hint"/>
+            android:hint="@string/bill_modify_name_hint"
+            android:maxLength="6"/>
     </LinearLayout>
 </LinearLayout>

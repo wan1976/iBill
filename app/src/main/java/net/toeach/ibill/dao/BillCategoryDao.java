@@ -31,7 +31,7 @@ public class BillCategoryDao extends TBaseDao<BillCategory> {
 
     /**
      * 获取分类对象
-     *
+     * @param name 名称
      * @return 分类对象
      * @throws DbException 异常
      */
