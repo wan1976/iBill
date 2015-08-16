@@ -45,6 +45,10 @@
         <activity
             android:name=".ui.activity.BillRecordModifyActivity"
             android:screenOrientation="portrait"/>
+        <!--月账单添加/修改界面-->
+        <activity
+            android:name=".ui.activity.MonthlyBillModifyActivity"
+            android:screenOrientation="portrait"/>
         <!--关于界面-->
         <activity
             android:name=".ui.activity.AboutActivity"

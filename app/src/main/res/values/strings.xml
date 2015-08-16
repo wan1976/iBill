@@ -5,6 +5,8 @@
     <string name="record_title">费用明细</string>
     <string name="bill_title">我的账单</string>
     <string name="list_empty">暂无数据</string>
+    <string name="button_yes">是</string>
+    <string name="button_no">否</string>
 
     <string name="setting_title">设置</string>
     <string name="setting_pannel_category">分类设置</string>
@@ -35,13 +37,13 @@
     <string name="record_modify_success">删除成功</string>
     <string name="record_add_cat">新分类</string>
 
+    <string name="bill_add_title">月账单</string>
+    <string name="bill_modify_name">月份</string>
+    <string name="bill_modify_name_hint">请输入账单月份，例如：201508</string>
+
     <string name="about_title">关于</string>
     <string name="about_company">广州盈哲计算机科技有限公司</string>
-
     <string name="help_title">帮助</string>
-
-    <string name="button_yes">是</string>
-    <string name="button_no">否</string>
 
     <string name="err_1001">账单id不能为0</string>
     <string name="err_1002">附件URI不能为空</string>

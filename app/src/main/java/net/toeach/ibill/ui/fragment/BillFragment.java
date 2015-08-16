@@ -1,5 +1,6 @@
 package net.toeach.ibill.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import com.shehabic.droppy.DroppyClickCallbackInterface;
 import com.shehabic.droppy.DroppyMenuPopup;
 
 import net.toeach.ibill.R;
+import net.toeach.ibill.ui.activity.MonthlyBillModifyActivity;
 
 /**
  * 账单界面
@@ -44,10 +46,14 @@ public class BillFragment extends BaseFragment {
                     @Override
                     public void call(View v, int id) {
                         switch (id) {
-                            case R.id.menu_1:// 月账单
+                            case R.id.menu_1: {// 月账单
+                                Intent i = new Intent(getActivity(), MonthlyBillModifyActivity.class);
+                                getActivity().startActivity(i);
                                 break;
-                            case R.id.menu_2:// 自定义账单
+                            }
+                            case R.id.menu_2: {// 自定义账单
                                 break;
+                            }
                         }
                     }
                 })
