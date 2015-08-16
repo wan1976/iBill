@@ -54,4 +54,5 @@
     <string name="err_1007">分类名称不能为空</string>
     <string name="err_1008">分类图标不能为空</string>
     <string name="err_1009">分类名称已经存在</string>
+    <string name="err_1010">账单已经存在</string>
 </resources>
