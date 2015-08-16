@@ -14,6 +14,7 @@ import net.toeach.common.utils.BusProvider;
 import net.toeach.ibill.Constants;
 import net.toeach.ibill.R;
 import net.toeach.ibill.model.BillEvent;
+import net.toeach.ibill.ui.widget.CustomProgressBar;
 import net.toeach.ibill.ui.widget.NotificationBox;
 
 import de.greenrobot.event.EventBus;
@@ -24,7 +25,7 @@ import de.greenrobot.event.EventBus;
 public abstract class BaseActivity extends TBaseActivity {
     protected View mBtnFunc;// 功能按钮
     protected EventBus mBus;
-    //    private CustomProgressBar mProgressDialog;// 进度对话框
+    private CustomProgressBar mProgressDialog;// 进度对话框
     private View mBtnBack;// 返回按钮
     private TextView mTitle;// 标题文字
 
@@ -157,8 +158,8 @@ public abstract class BaseActivity extends TBaseActivity {
      */
     protected void initProgressDialog() {
         // 初始化对话框
-//        mProgressDialog = new CustomProgressBar(this);
-//        mProgressDialog.setCancelable(true);
+        mProgressDialog = new CustomProgressBar(this);
+        mProgressDialog.setCancelable(true);
     }
 
     /**
@@ -166,7 +167,7 @@ public abstract class BaseActivity extends TBaseActivity {
      */
     protected void showProgressDialog() {
         // 显示进度对话框
-//        mProgressDialog.show();
+        mProgressDialog.show();
     }
 
     /**
@@ -174,9 +175,9 @@ public abstract class BaseActivity extends TBaseActivity {
      */
     protected void dismissProgressDialog() {
         // 关闭进度对话框
-//        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-//            mProgressDialog.dismiss();
-//        }
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     /**
