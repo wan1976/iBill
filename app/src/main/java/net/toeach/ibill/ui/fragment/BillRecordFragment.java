@@ -108,7 +108,6 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
         startActivity(new Intent(getActivity(), BillRecordModifyActivity.class));
     }
 
-
     /**
      * 接收到事件通知
      *
@@ -123,7 +122,7 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
         // 获取事件类型
         BillEvent.EventType eventType = event.getEventType();
         // 重新加载数据
-        if (eventType.equals(BillEvent.EventType.EVENT_RELOAD)) {
+        if (eventType.equals(BillEvent.EventType.EVENT_RELOAD_RECORD)) {
             mPageNo = 0;
             loadData();
         }

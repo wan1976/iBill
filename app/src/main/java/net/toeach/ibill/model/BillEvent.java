@@ -55,6 +55,7 @@ public class BillEvent {
     public enum EventType {
         EVENT_NET_STAT_QUERY, // 网络状态查询
         EVENT_NET_STAT_RESULT, // 网络状态查询结果
-        EVENT_RELOAD;// 重新加载数据
+        EVENT_RELOAD_CAT,// 重新加载分类数据
+        EVENT_RELOAD_RECORD;// 重新加载明细记录数据
     }
 }

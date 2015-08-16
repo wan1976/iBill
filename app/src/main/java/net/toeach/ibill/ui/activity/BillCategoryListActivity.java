@@ -166,7 +166,7 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
         // 获取事件类型
         BillEvent.EventType eventType = event.getEventType();
         // 重新加载数据
-        if (eventType.equals(BillEvent.EventType.EVENT_RELOAD)) {
+        if (eventType.equals(BillEvent.EventType.EVENT_RELOAD_CAT)) {
             loadData();
         }
 

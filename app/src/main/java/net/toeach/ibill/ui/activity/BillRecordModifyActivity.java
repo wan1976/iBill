@@ -1,6 +1,7 @@
 package net.toeach.ibill.ui.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -64,10 +66,30 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
     }
 
     @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        BillCategory bean = mAdapter.getItem(position);
+        if (bean != null) {
+            if (bean.getIcon().equals("ic_cat_add")) {// 新建分类
+                Intent i = new Intent(this, BillCategoryModifyActivity.class);
+                startActivity(i);
+            } else {// 选择分类
+                for (int i = 0; i < mAdapter.getCount(); i++) {
+                    BillCategory icon = mAdapter.getItem(i);
+                    icon.setChecked(false);
+                }
+                bean.setChecked(true);// 选中图标
+                mCategory = bean;
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
     public void handleMessage(Message message) {
         super.handleMessage(message);
         switch (message.what) {
             case BillCategoryManager.MSG_LIST_SUCCESS: {
+                mAdapter.clear();
                 List<BillCategory> list = (List<BillCategory>) message.obj;
                 int i = 0;
                 for (BillCategory bean : list) {
@@ -79,13 +101,20 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
                     mAdapter.add(bean);
                     i++;
                 }
+
+                // 设置添加分类按钮
+                BillCategory button = new BillCategory();
+                button.setIcon("ic_cat_add");
+                button.setName(getString(R.string.record_add_cat));
+                mAdapter.add(button);
+
                 break;
             }
             case BillRecordManager.MSG_SAVE_SUCCESS: {
                 showToast(R.string.record_modify_save_success);
                 finish();
                 // 通知分类列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD, null);
+                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_RECORD, null);
                 EventBus.getDefault().post(event);
                 break;
             }
@@ -93,7 +122,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
                 showToast(R.string.record_modify_success);
                 finish();
                 // 通知分类列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD, null);
+                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_RECORD, null);
                 EventBus.getDefault().post(event);
                 break;
             }
@@ -127,18 +156,31 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
         }).start();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        BillCategory bean = mAdapter.getItem(position);
-        if (bean != null) {
-            for (int i = 0; i < mAdapter.getCount(); i++) {
-                BillCategory icon = mAdapter.getItem(i);
-                icon.setChecked(false);
-            }
-            bean.setChecked(true);// 选中图标
-            mCategory = bean;
-            mAdapter.notifyDataSetChanged();
+    /**
+     * 接收到事件通知
+     *
+     * @param event
+     */
+    public void onEvent(BillEvent event) {
+        if (event == null) {
+            return;
         }
+        LogUtils.d(event.toString());
+
+        // 获取事件类型
+        BillEvent.EventType eventType = event.getEventType();
+        // 重新加载数据
+        if (eventType.equals(BillEvent.EventType.EVENT_RELOAD_CAT)) {
+            // 加载分类数据
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    BillCategoryManager.getInstance().getList(handler);
+                }
+            }).start();
+        }
+
+        super.onEvent(event);
     }
 
     /**
@@ -202,7 +244,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
             }
         }).start();
 
-
+        // 日期选择框监听器
         mDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {

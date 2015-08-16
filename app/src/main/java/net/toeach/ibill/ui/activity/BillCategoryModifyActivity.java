@@ -57,7 +57,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
                 showToast(R.string.category_modify_save_success);
                 finish();
                 // 通知分类列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD, null);
+                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_CAT, null);
                 EventBus.getDefault().post(event);
                 break;
         }
@@ -142,6 +142,9 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
         LinkedList<String> keySet = new LinkedList<String>(Constants.CAT_ICONS.keySet());
         Collections.sort(keySet);
         for (String key : keySet) {
+            if (key.equals("ic_cat_add")) {
+                continue;
+            }
             CategoryIcon bean = new CategoryIcon();
             bean.setName(key);
             bean.setValue(Constants.CAT_ICONS.get(key));

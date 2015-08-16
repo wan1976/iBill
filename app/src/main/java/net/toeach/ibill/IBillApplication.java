@@ -123,6 +123,7 @@ public class IBillApplication extends Application {
      */
     private void initCatIcons() {
         Constants.CAT_ICONS = new HashMap<String, Integer>();
+        Constants.CAT_ICONS.put("ic_cat_add", R.mipmap.ic_cat_add);
         Constants.CAT_ICONS.put("ic_cat_001", R.mipmap.ic_cat_1);
         Constants.CAT_ICONS.put("ic_cat_002", R.mipmap.ic_cat_2);
         Constants.CAT_ICONS.put("ic_cat_003", R.mipmap.ic_cat_3);

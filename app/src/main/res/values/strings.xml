@@ -33,6 +33,7 @@
     <string name="record_modify_save_success">保存成功</string>
     <string name="record_modify_delete">删除记录</string>
     <string name="record_modify_success">删除成功</string>
+    <string name="record_add_cat">新分类</string>
 
     <string name="about_title">关于</string>
     <string name="about_company">广州盈哲计算机科技有限公司</string>
