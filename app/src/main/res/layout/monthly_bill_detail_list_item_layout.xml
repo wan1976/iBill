@@ -9,12 +9,11 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/AppTheme.UI.FormTitleText"
+        style="@style/AppTheme.UI.Form.SectionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:paddingTop="10dp"
         android:text="机票"/>
 
@@ -24,32 +23,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="5dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/date"
-            style="@style/AppTheme.UI.PannelText"
-            android:layout_width="100dp"
+            style="@style/AppTheme.UI.Form.ItemNameText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2015-08-11"/>
 
         <TextView
             android:id="@+id/memo"
-            style="@style/AppTheme.UI.PannelText"
+            style="@style/AppTheme.UI.Form.ItemNameText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="memo"/>
 
         <TextView
             android:id="@+id/cost"
-            style="@style/AppTheme.UI.PannelText"
-            android:layout_width="0dp"
+            style="@style/AppTheme.UI.Form.ItemValueText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
             android:gravity="right"
             android:text="$100"/>
     </LinearLayout>
@@ -60,8 +61,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:paddingTop="10dp">
 
         <View
@@ -76,14 +77,14 @@
             android:gravity="center">
 
             <TextView
-                style="@style/AppTheme.UI.PannelText"
+                style="@style/AppTheme.UI.Form.SectionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/form_detail_total"/>
 
             <TextView
                 android:id="@+id/total_cost"
-                style="@style/AppTheme.UI.FormTotalText"
+                style="@style/AppTheme.UI.Form.TotalText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

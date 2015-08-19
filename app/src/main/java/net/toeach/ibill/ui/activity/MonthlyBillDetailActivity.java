@@ -2,6 +2,7 @@ package net.toeach.ibill.ui.activity;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,8 +31,6 @@ import de.greenrobot.event.EventBus;
 public class MonthlyBillDetailActivity extends BaseActivity {
     @ViewInject(R.id.list)
     private ListView mListView;// 列表对象
-    @ViewInject(R.id.title)
-    private TextView mTxtTitle;// 标题
 
     private MonthlyBillDetailListItemAdapter mAdapter;// 适配器
     private int mFormId;
@@ -100,13 +99,17 @@ public class MonthlyBillDetailActivity extends BaseActivity {
         // 设置标题名称
         setTitleValue(R.string.form_detail_title);
         setFuncButton(R.drawable.button_more);// 设置功能按钮
-
-        // 设置账单名称
-        String title = getIntent().getStringExtra("title");
-        title = String.format(getString(R.string.form_detail_title_name), title);
-        mTxtTitle.setText(title);
         mFormId = getIntent().getIntExtra("id", -1);
 
+        String title = getIntent().getStringExtra("title");
+        title = String.format(getString(R.string.form_detail_title_name), title);
+        // 设置列表标头
+        View header = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_header_layout, null, false);
+        TextView txtTitle = (TextView)header.findViewById(R.id.title);
+        txtTitle.setText(title);
+        mListView.addHeaderView(header);
+
+        // 设置列表Footer
         ImageView footer = new ImageView(this);
         footer.setBackgroundResource(R.drawable.bottom_line);
         mListView.addFooterView(footer);

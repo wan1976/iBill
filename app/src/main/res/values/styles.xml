@@ -51,12 +51,37 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AppTheme.UI.FormTitleText">
-        <item name="android:textColor">#000000</item>
-        <item name="android:textSize">20sp</item>
+    <style name="AppTheme.UI.List">
+        <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AppTheme.UI.FormTotalText">
+    <style name="AppTheme.UI.List.Item">
+        <item name="android:textColor">#8a8888</item>
+    </style>
+
+    <style name="AppTheme.UI.Form">
+        <item name="android:textColor">#8a8888</item>
+    </style>
+
+    <style name="AppTheme.UI.Form.TitleText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="AppTheme.UI.Form.SectionText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTheme.UI.Form.ItemNameText">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="AppTheme.UI.Form.ItemValueText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="AppTheme.UI.Form.TotalText">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">28sp</item>
     </style>
