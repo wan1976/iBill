@@ -25,7 +25,7 @@ public class BillRecordDao extends TBaseDao<BillRecord> {
     /**
      * 返回实例对象
      *
-     * @return
+     * @return 实例对象
      */
     public static BillRecordDao getInstance() {
         return instance;
@@ -50,13 +50,27 @@ public class BillRecordDao extends TBaseDao<BillRecord> {
     /**
      * 获取分类下的费用明细对象
      *
-     * @param catId    分类id
+     * @param catId 分类id
      * @return 费用明细列表
      * @throws DbException 异常
      */
     public List<BillRecord> getList(int catId) throws DbException {
         Selector selector = Selector.from(BillRecord.class)
                 .where("cat_id", "=", catId)
+                .orderBy("bill_date", true);
+        return db.findAll(selector);
+    }
+
+    /**
+     * 获取指定月份的费用明细对象
+     *
+     * @param month 日期
+     * @return 费用明细列表
+     * @throws DbException 异常
+     */
+    public List<BillRecord> getList(String month) throws DbException {
+        Selector selector = Selector.from(BillRecord.class)
+                .where("bill_month", "=", month)
                 .orderBy("bill_date", true);
         return db.findAll(selector);
     }

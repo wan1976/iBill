@@ -8,6 +8,7 @@ import java.util.Map;
 public class BillEvent {
     private EventType eventType;// 事件类型
     private Map<String, ?> data;// 附带数据
+
     /**
      * 构造函数
      */
@@ -56,6 +57,7 @@ public class BillEvent {
         EVENT_NET_STAT_QUERY, // 网络状态查询
         EVENT_NET_STAT_RESULT, // 网络状态查询结果
         EVENT_RELOAD_CAT,// 重新加载分类数据
-        EVENT_RELOAD_RECORD;// 重新加载明细记录数据
+        EVENT_RELOAD_RECORD,// 重新加载明细记录数据
+        EVENT_RELOAD_BILL;// 重新加载账单记录数据
     }
 }

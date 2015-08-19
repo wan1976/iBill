@@ -11,7 +11,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import net.toeach.ibill.R;
-import net.toeach.ibill.ui.fragment.BillFragment;
+import net.toeach.ibill.ui.fragment.BillFormFragment;
 import net.toeach.ibill.ui.fragment.BillRecordFragment;
 import net.toeach.ibill.ui.fragment.SettingFragment;
 
@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
     private ImageView mTabItem3;// tab3
 
     private BillRecordFragment mFragment1;
-    private BillFragment mFragment2;
+    private BillFormFragment mFragment2;
     private SettingFragment mFragment3;
 
     @Override
@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
         mTabItem1.setSelected(true);
 
         mFragment1 = new BillRecordFragment();
-        mFragment2 = new BillFragment();
+        mFragment2 = new BillFormFragment();
         mFragment3 = new SettingFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, mFragment1).commit();
     }

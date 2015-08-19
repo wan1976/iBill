@@ -247,6 +247,7 @@ public abstract class BaseActivity extends TBaseActivity {
     protected void doBack() {
         finish();
     }
+
     /**
      * 抽象方法，由子类来实现功能按钮的点击事件
      */

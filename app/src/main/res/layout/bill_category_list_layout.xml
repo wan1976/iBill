@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/panel_white"
-        android:divider="#f2f2f2"
-        android:dividerHeight="1px"
+        android:divider="@drawable/dot_line"
         android:listSelector="@drawable/panel_white"
         android:visibility="gone"/>
 

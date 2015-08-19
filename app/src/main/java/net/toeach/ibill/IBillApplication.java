@@ -13,6 +13,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import net.toeach.ibill.model.BillCategory;
+import net.toeach.ibill.model.BillForm;
+import net.toeach.ibill.model.BillRecord;
+import net.toeach.ibill.model.BillSection;
+import net.toeach.ibill.model.BillSectionRecord;
+
 import java.io.File;
 import java.util.HashMap;
 
@@ -95,6 +101,15 @@ public class IBillApplication extends Application {
 
             initCatIcons();
             initErrors();
+
+            DbUtils db = getDbInstance();
+            LogUtils.d("Creating tables if not exist.");
+            db.createTableIfNotExist(BillCategory.class);// 分类表
+            db.createTableIfNotExist(BillRecord.class);// 费用明细表
+            db.createTableIfNotExist(BillForm.class);// 主账单表
+            db.createTableIfNotExist(BillSection.class);// 子账单表
+            db.createTableIfNotExist(BillSectionRecord.class);// 子账单费用明细映射表
+
         } catch (Exception e) {
             LogUtils.e("error", e);
         }
@@ -161,5 +176,6 @@ public class IBillApplication extends Application {
         Constants.ERRORS.put(1008, getString(R.string.err_1008));
         Constants.ERRORS.put(1009, getString(R.string.err_1009));
         Constants.ERRORS.put(1010, getString(R.string.err_1010));
+        Constants.ERRORS.put(1011, getString(R.string.err_1011));
     }
 }

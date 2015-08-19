@@ -65,7 +65,7 @@ public class BillRecordManager extends BaseManager {
     /**
      * 删除费用明细记录
      *
-     * @param id    费用明细记录对象表示
+     * @param id      费用明细记录对象表示
      * @param handler Handler对象
      */
     public void deleteById(int id, Handler handler) {

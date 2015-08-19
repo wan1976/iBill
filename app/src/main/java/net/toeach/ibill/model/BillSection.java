@@ -1,6 +1,5 @@
 package net.toeach.ibill.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.lidroid.xutils.db.annotation.Column;
 import com.lidroid.xutils.db.annotation.Table;
 import com.lidroid.xutils.db.annotation.Transient;
@@ -13,19 +12,15 @@ import java.util.List;
  */
 @Table(name = "bill_section")
 public class BillSection {
-    @JSONField(name = "id")
     @Column(column = "_id")
     private int id;// 标识
 
-    @JSONField(name = "parent_id")
     @Column(column = "parent_id")
     private int parentId;// 主账单标识
 
-    @JSONField(name = "title")
     @Column(column = "title")
     private String title;// 子标题
 
-    @JSONField(name = "create_time")
     @Column(column = "create_time")
     private Date createTime;// 记录时间
 

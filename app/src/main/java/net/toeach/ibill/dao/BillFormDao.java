@@ -32,6 +32,21 @@ public class BillFormDao extends TBaseDao<BillForm> {
     }
 
     /**
+     * 获取账单信息
+     *
+     * @param title 标题
+     * @param type  类型
+     * @return 返回判断结果
+     * @throws DbException 异常
+     */
+    public BillForm findByTitle(String title, int type) throws DbException {
+        Selector selector = Selector.from(BillForm.class)
+                .where("type", "=", type)
+                .and("title", "=", title);
+        return db.findFirst(selector);
+    }
+
+    /**
      * 获取账单列表
      *
      * @param pageNo   分页号
@@ -45,18 +60,5 @@ public class BillFormDao extends TBaseDao<BillForm> {
                 .limit(pageSize)
                 .offset(pageSize * pageNo);
         return db.findAll(selector);
-    }
-
-    /**
-     * 获取账单对象
-     *
-     * @param title 标题
-     * @return 账单对象
-     * @throws DbException 异常
-     */
-    public BillForm getByTitle(String title) throws DbException {
-        Selector selector = Selector.from(BillForm.class)
-                .where("title", "=", title);
-        return db.findFirst(selector);
     }
 }

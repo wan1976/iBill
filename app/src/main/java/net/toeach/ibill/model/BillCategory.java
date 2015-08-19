@@ -1,6 +1,5 @@
 package net.toeach.ibill.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.lidroid.xutils.db.annotation.Column;
 import com.lidroid.xutils.db.annotation.Table;
 import com.lidroid.xutils.db.annotation.Transient;
@@ -13,15 +12,12 @@ import org.parceler.Parcel;
 @Table(name = "bill_category")
 @Parcel(Parcel.Serialization.BEAN)
 public class BillCategory {
-    @JSONField(name = "id")
     @Column(column = "_id")
     private int id;// 标识
 
-    @JSONField(name = "cat_name")
     @Column(column = "cat_name")
     private String name;// 分类名称
 
-    @JSONField(name = "cat_icon")
     @Column(column = "cat_icon")
     private String icon;// 分类图标
 

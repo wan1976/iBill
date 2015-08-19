@@ -23,7 +23,7 @@
             style="@style/AppTheme.UI.PannelText.InputTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/bill_modify_name"/>
+            android:text="@string/form_modify_name"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="@color/transparent"
-            android:hint="@string/bill_modify_name_hint"
+            android:hint="@string/form_modify_name_hint"
             android:maxLength="6"/>
     </LinearLayout>
 </LinearLayout>

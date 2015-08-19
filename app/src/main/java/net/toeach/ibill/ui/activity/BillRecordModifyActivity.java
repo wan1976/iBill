@@ -119,7 +119,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
                 break;
             }
             case BillRecordManager.MSG_DEL_SUCCESS: {
-                showToast(R.string.record_modify_success);
+                showToast(R.string.record_modify_delete_success);
                 finish();
                 // 通知分类列表面刷新UI
                 BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_RECORD, null);
@@ -141,6 +141,11 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
             mRecord.setBillDate(DateUtil.parseDate(mTxtDate.getText().toString(), "yyyy-M-d"));
         } catch (Exception e) {
             mRecord.setBillDate(new Date());
+        }
+        try {
+            mRecord.setBillMonth(DateUtil.formatPatternDate(mRecord.getBillDate(), "yyyyMM"));
+        } catch (Exception e) {
+
         }
         mRecord.setCost(Integer.parseInt(mTxtCost.getText().toString()));// 金额
         mRecord.setMemo(mTxtMemo.getText().toString());// 备注

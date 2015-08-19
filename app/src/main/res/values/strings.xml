@@ -34,12 +34,21 @@
     <string name="record_modify_memo">备注</string>
     <string name="record_modify_save_success">保存成功</string>
     <string name="record_modify_delete">删除记录</string>
-    <string name="record_modify_success">删除成功</string>
+    <string name="record_modify_delete_success">删除成功</string>
     <string name="record_add_cat">新分类</string>
 
-    <string name="bill_add_title">月账单</string>
-    <string name="bill_modify_name">月份</string>
-    <string name="bill_modify_name_hint">请输入账单月份，例如：201508</string>
+    <string name="form_add_title">月账单</string>
+    <string name="form_modify_name">月份</string>
+    <string name="form_modify_name_hint">请输入账单月份，例如：201508</string>
+    <string name="form_type_monthly">月账单</string>
+    <string name="form_type_custom">自定义账单</string>
+    <string name="form_existed">月账单已存在，是否覆盖？</string>
+    <string name="form_detail_title">账单详情</string>
+    <string name="form_detail_title_name">账单%1$s</string>
+    <string name="form_detail_total">合计</string>
+    <string name="form_detail_confirm_del">是否要删除账单？</string>
+    <string name="form_detail_delete_success">删除成功</string>
+    <string name="form_detail_confirm_redo">是否要重新生成账单？</string>
 
     <string name="about_title">关于</string>
     <string name="about_company">广州盈哲计算机科技有限公司</string>
@@ -54,5 +63,6 @@
     <string name="err_1007">分类名称不能为空</string>
     <string name="err_1008">分类图标不能为空</string>
     <string name="err_1009">分类名称已经存在</string>
-    <string name="err_1010">账单已经存在</string>
+    <string name="err_1010">账单月份不能为空</string>
+    <string name="err_1011">对应月份的账单已经存在</string>
 </resources>
