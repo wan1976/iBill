@@ -13,6 +13,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import net.toeach.ibill.R;
 import net.toeach.ibill.ui.activity.AboutActivity;
 import net.toeach.ibill.ui.activity.BillCategoryListActivity;
+import net.toeach.ibill.ui.activity.FeedbackActivity;
 import net.toeach.ibill.ui.activity.HelpActivity;
 
 /**
@@ -57,8 +58,11 @@ public class SettingFragment extends BaseFragment {
                 getActivity().startActivity(i);
                 break;
             }
-            case R.id.btn_feedback:
+            case R.id.btn_feedback: {
+                Intent i = new Intent(getActivity(), FeedbackActivity.class);
+                getActivity().startActivity(i);
                 break;
+            }
             case R.id.btn_help: {
                 Intent i = new Intent(getActivity(), HelpActivity.class);
                 getActivity().startActivity(i);

@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.umeng.fb.push.FeedbackPush;
 
 import net.toeach.ibill.model.BillCategory;
 import net.toeach.ibill.model.BillForm;
@@ -110,6 +111,7 @@ public class IBillApplication extends Application {
             db.createTableIfNotExist(BillSection.class);// 子账单表
             db.createTableIfNotExist(BillSectionRecord.class);// 子账单费用明细映射表
 
+            FeedbackPush.getInstance(this).init(false);
         } catch (Exception e) {
             LogUtils.e("error", e);
         }

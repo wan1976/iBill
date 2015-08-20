@@ -94,8 +94,6 @@
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.1.0" level="project" />
-    <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
-    <orderEntry type="library" exported="" name="library-1.3" level="project" />
     <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="parceler-0.2.16" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.1.0" level="project" />
@@ -104,7 +102,12 @@
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
     <orderEntry type="library" exported="" name="materialish-progress-1.0" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.2.6" level="project" />
+    <orderEntry type="library" exported="" name="com.umeng.fb.5.4.0" level="project" />
     <orderEntry type="library" exported="" name="Droppy-0.2.5.1" level="project" />
+    <orderEntry type="library" exported="" name="com.umeng.message.lib_v2.4.1" level="project" />
+    <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
+    <orderEntry type="library" exported="" name="library-1.3" level="project" />
+    <orderEntry type="library" exported="" name="umeng-analytics-v5.5.3" level="project" />
     <orderEntry type="module" module-name="toeach_libs" exported="" />
   </component>
 </module>
