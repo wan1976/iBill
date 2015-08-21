@@ -1,10 +1,10 @@
 package net.toeach.ibill.ui.activity;
 
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.EditText;
+import android.widget.TextView;
 
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -16,7 +16,7 @@ import net.toeach.ibill.R;
 @ContentView(R.layout.about_layout)
 public class AboutActivity extends BaseActivity {
     @ViewInject(R.id.version)
-    private EditText mTxtVersion;// 当前应用版本名称
+    private TextView mTxtVersion;// 当前应用版本名称
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,11 @@ public class AboutActivity extends BaseActivity {
 
         // 设置版本名
         try {
-            PackageManager manager = this.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
-            mTxtVersion.setText(info.versionName);
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+            mTxtVersion.setText("V" + info.versionName);
+            LogUtils.d("code:" + info.versionCode + ", version:" + info.versionName);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

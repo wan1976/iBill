@@ -79,6 +79,15 @@
         <activity
             android:name=".ui.activity.FeedbackActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService">
+        </service>
     </application>
 
 </manifest>

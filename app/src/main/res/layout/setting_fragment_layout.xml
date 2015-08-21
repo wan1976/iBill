@@ -99,6 +99,49 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_arrow_right"/>
     </LinearLayout>
+    <!--检查更新-->
+    <LinearLayout
+        android:id="@+id/btn_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/panel_white"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_update"/>
+
+        <TextView
+            style="@style/AppTheme.UI.PannelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/setting_pannel_update"/>
+
+        <ImageView
+            android:id="@+id/new_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_new_version"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_arrow_right"/>
+    </LinearLayout>
     <!--关于-->
     <LinearLayout
         android:id="@+id/btn_about"

@@ -34,8 +34,17 @@ public class HelpActivity extends BaseActivity {
         setTitleValue(R.string.help_title);
 
         mWebView.getSettings().setSupportZoom(false);
-        mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
-        mWebView.getSettings().setJavaScriptEnabled(false);
+        mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setDefaultTextEncodingName("utf8");
         mWebView.loadUrl("file:///android_asset/help.html");
+
+//        mWebView.setWebViewClient(new WebViewClient() {
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed();  // 接受所有网站的证书
+//            }
+//        });
+//        mWebView.loadUrl("https://honglinktech.com/shareApp/LBS.php?Address=广东省东莞市厚街镇博民街");
     }
 }

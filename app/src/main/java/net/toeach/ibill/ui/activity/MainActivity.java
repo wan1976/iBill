@@ -9,11 +9,23 @@ import android.widget.ImageView;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.umeng.update.UmengDialogButtonListener;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
+import net.toeach.ibill.Constants;
 import net.toeach.ibill.R;
+import net.toeach.ibill.model.BillEvent;
 import net.toeach.ibill.ui.fragment.BillFormFragment;
 import net.toeach.ibill.ui.fragment.BillRecordFragment;
 import net.toeach.ibill.ui.fragment.SettingFragment;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 应用主界面
@@ -57,6 +69,37 @@ public class MainActivity extends BaseActivity {
         mFragment2 = new BillFormFragment();
         mFragment3 = new SettingFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, mFragment1).commit();
+
+        UmengUpdateAgent.update(this);// 检查新版本
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+            @Override
+            public void onUpdateReturned(int status, UpdateResponse updateResponse) {
+                if (UpdateStatus.Yes == status) {// 有更新
+                    dismissProgressDialog();
+                    setPreferenceValue(Constants.KEY_NEW_VERSION, true);
+
+                    // 通知升级标志显示
+                    Map<String, String> data = new HashMap<>();
+                    data.put("show_flag", "true");
+                    BillEvent event = new BillEvent(BillEvent.EventType.EVENT_UPDATE, data);
+                    EventBus.getDefault().post(event);
+                }
+            }
+        });
+        UmengUpdateAgent.setDialogListener(new UmengDialogButtonListener() {
+            @Override
+            public void onClick(int status) {
+                if (UpdateStatus.Update == status) {
+                    setPreferenceValue(Constants.KEY_NEW_VERSION, false);
+
+                    // 通知升级标志隐藏
+                    Map<String, String> data = new HashMap<>();
+                    data.put("show_flag", "false");
+                    BillEvent event = new BillEvent(BillEvent.EventType.EVENT_UPDATE, data);
+                    EventBus.getDefault().post(event);
+                }
+            }
+        });
     }
 
     /**

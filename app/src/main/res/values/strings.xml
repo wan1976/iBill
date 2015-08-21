@@ -13,6 +13,7 @@
     <string name="setting_pannel_category">分类设置</string>
     <string name="setting_pannel_feedback">用户反馈</string>
     <string name="setting_pannel_help">帮助中心</string>
+    <string name="setting_pannel_update">检查更新</string>
     <string name="setting_pannel_about">关于</string>
 
     <string name="category_list_title">分类设置</string>
