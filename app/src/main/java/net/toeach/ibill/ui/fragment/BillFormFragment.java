@@ -132,6 +132,7 @@ public class BillFormFragment extends BaseFragment implements AdapterView.OnItem
      *
      * @param event
      */
+    @Override
     public void onEvent(BillEvent event) {
         if (event == null) {
             return;

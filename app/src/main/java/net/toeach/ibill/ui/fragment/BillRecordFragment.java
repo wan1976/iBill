@@ -113,6 +113,7 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
      *
      * @param event
      */
+    @Override
     public void onEvent(BillEvent event) {
         if (event == null) {
             return;

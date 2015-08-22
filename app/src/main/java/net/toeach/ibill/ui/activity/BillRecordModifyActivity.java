@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
+import net.toeach.common.utils.CurrencyInputFilter;
 import net.toeach.common.utils.DateUtil;
 import net.toeach.ibill.R;
 import net.toeach.ibill.business.BillCategoryManager;
@@ -144,10 +146,11 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
         }
         try {
             mRecord.setBillMonth(DateUtil.formatPatternDate(mRecord.getBillDate(), "yyyyMM"));
+            // 金额以分为单位
+            double cost = Double.parseDouble(mTxtCost.getText().toString()) * 100;
+            mRecord.setCost((int) cost);// 金额
         } catch (Exception e) {
-
         }
-        mRecord.setCost(Integer.parseInt(mTxtCost.getText().toString()));// 金额
         mRecord.setMemo(mTxtMemo.getText().toString());// 备注
         if (mCategory != null) {// 分类
             mRecord.setCatId(mCategory.getId());
@@ -166,6 +169,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
      *
      * @param event
      */
+    @Override
     public void onEvent(BillEvent event) {
         if (event == null) {
             return;
@@ -196,9 +200,12 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
         mRecord = Parcels.unwrap(getIntent().getParcelableExtra("record"));
         if (mRecord != null) {
             mMode = 1;// 编辑模式
-            String cost = String.valueOf(mRecord.getCost());
-            mTxtCost.setText(cost);
-            mTxtCost.setSelection(cost.length());
+            // 金额是以分为单位的，要转换为以元为单位
+            double cost = mRecord.getCost();
+            cost = cost / 100;
+            String s = String.valueOf(cost);
+            mTxtCost.setText(s);
+            mTxtCost.setSelection(s.length());
             try {
                 mTxtDate.setText(DateUtil.formatPatternDate(mRecord.getBillDate(), "yyyy-M-d"));
             } catch (Exception e) {
@@ -221,7 +228,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
         setTitleValue(mMode == 1 ? R.string.record_modify_title : R.string.record_add_title);
         setFuncButton(R.drawable.button_save);// 设置功能按钮
 
-        // 监听输入名称
+        // 监听输入金额
         mTxtCost.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -237,6 +244,9 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
                 validateCost(s);
             }
         });
+        // 保持小数点后2位数字
+        mTxtCost.setFilters(new InputFilter[]{new CurrencyInputFilter()});
+
         // 图标GridView点击事件
         mGridCategory.setOnItemClickListener(this);
         mAdapter = new BillCategoryGridItemAdapter(this);
@@ -264,21 +274,11 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
     /**
      * 校验是否正确的金额
      *
-     * @param cost
+     * @param cost 输入的金额
      */
     private void validateCost(String cost) {
         cost = cost.trim();
         if (TextUtils.isEmpty(cost)) {// 不能为空
-            disableButtonSave();
-            return;
-        }
-        try {
-            int num = Integer.valueOf(cost);
-            if (!cost.equals(String.valueOf(num))) {// 输入数字不正确
-                disableButtonSave();
-                return;
-            }
-        } catch (Exception e) {
             disableButtonSave();
             return;
         }

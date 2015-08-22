@@ -32,7 +32,7 @@
     <string name="record_modify_title">编辑记录</string>
     <string name="record_modify_date">日期</string>
     <string name="record_modify_cost">金额</string>
-    <string name="record_modify_cost_hint">单位为分，例如100代表1元</string>
+    <string name="record_modify_cost_hint">请输入金额</string>
     <string name="record_modify_category">分类</string>
     <string name="record_modify_memo">备注</string>
     <string name="record_modify_save_success">保存成功</string>

@@ -157,6 +157,7 @@ public class BillCategoryListActivity extends BaseActivity implements AdapterVie
      *
      * @param event
      */
+    @Override
     public void onEvent(BillEvent event) {
         if (event == null) {
             return;

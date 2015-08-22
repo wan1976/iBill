@@ -64,6 +64,7 @@ public class SettingFragment extends BaseFragment {
      *
      * @param event
      */
+    @Override
     public void onEvent(BillEvent event) {
         if (event == null) {
             return;
