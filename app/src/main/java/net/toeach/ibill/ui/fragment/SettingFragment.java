@@ -35,6 +35,8 @@ public class SettingFragment extends BaseFragment {
     @ViewInject(R.id.new_version)
     private ImageView mNewVersion;// 新版本提示
 
+    private boolean mNetworkAvailable;// 网络是否可用
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting_fragment_layout, container, false);
@@ -44,6 +46,13 @@ public class SettingFragment extends BaseFragment {
         init();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 查询网络状态
+        mBus.post(new BillEvent(BillEvent.EventType.EVENT_NET_STAT_QUERY, null));
     }
 
     @Override
@@ -83,6 +92,16 @@ public class SettingFragment extends BaseFragment {
     public void doFunction() {
     }
 
+    @Override
+    public void onConnect() {
+        mNetworkAvailable = true;
+    }
+
+    @Override
+    public void onDisconnect() {
+        mNetworkAvailable = false;
+    }
+
     private void init() {
         hideBackButton();// 隐藏返回按钮
         setTitleValue(R.string.setting_title);// 设置标题名称
@@ -116,28 +135,7 @@ public class SettingFragment extends BaseFragment {
                 break;
             }
             case R.id.btn_update: {
-                showProgressDialog();
-
-                UmengUpdateAgent.update(getActivity());// 检查新版本
-                UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-                    @Override
-                    public void onUpdateReturned(int status, UpdateResponse updateResponse) {
-                        dismissProgressDialog();
-                        if (UpdateStatus.Yes == status) {// 有更新
-                            setPreferenceValue(Constants.KEY_NEW_VERSION, true);
-                            mNewVersion.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
-                UmengUpdateAgent.setDialogListener(new UmengDialogButtonListener() {
-                    @Override
-                    public void onClick(int status) {
-                        if (UpdateStatus.Update == status) {
-                            setPreferenceValue(Constants.KEY_NEW_VERSION, false);
-                            mNewVersion.setVisibility(View.GONE);
-                        }
-                    }
-                });
+                doUpdate();
                 break;
             }
             case R.id.btn_about: {
@@ -146,5 +144,37 @@ public class SettingFragment extends BaseFragment {
                 break;
             }
         }
+    }
+
+    /**
+     * 升级
+     */
+    private void doUpdate() {
+        if (!mNetworkAvailable) {
+            showToast(R.string.network_not_available);
+            return;
+        }
+        showProgressDialog();
+
+        UmengUpdateAgent.update(getActivity());// 检查新版本
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+            @Override
+            public void onUpdateReturned(int status, UpdateResponse updateResponse) {
+                dismissProgressDialog();
+                if (UpdateStatus.Yes == status) {// 有更新
+                    setPreferenceValue(Constants.KEY_NEW_VERSION, true);
+                    mNewVersion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        UmengUpdateAgent.setDialogListener(new UmengDialogButtonListener() {
+            @Override
+            public void onClick(int status) {
+                if (UpdateStatus.Update == status) {
+                    setPreferenceValue(Constants.KEY_NEW_VERSION, false);
+                    mNewVersion.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

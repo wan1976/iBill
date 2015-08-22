@@ -2,6 +2,7 @@ package net.toeach.ibill;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 
 import com.lidroid.xutils.DbUtils;
@@ -19,6 +20,7 @@ import net.toeach.ibill.model.BillForm;
 import net.toeach.ibill.model.BillRecord;
 import net.toeach.ibill.model.BillSection;
 import net.toeach.ibill.model.BillSectionRecord;
+import net.toeach.ibill.service.NetworkStateService;
 
 import java.io.File;
 import java.util.HashMap;
@@ -112,6 +114,7 @@ public class IBillApplication extends Application {
             db.createTableIfNotExist(BillSectionRecord.class);// 子账单费用明细映射表
 
             FeedbackPush.getInstance(this).init(false);
+            startService(new Intent(this, NetworkStateService.class));// 启动网络监控服务
         } catch (Exception e) {
             LogUtils.e("error", e);
         }

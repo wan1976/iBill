@@ -64,6 +64,8 @@
         <activity
             android:name=".ui.activity.HelpActivity"
             android:screenOrientation="portrait"/>
+        <!--网络状态服务-->
+        <service android:name=".service.NetworkStateService"/>
 
         <!--友盟用户反馈界面-->
         <meta-data

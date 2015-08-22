@@ -8,6 +8,7 @@
     <string name="button_send">发送</string>
     <string name="button_yes">是</string>
     <string name="button_no">否</string>
+    <string name="network_not_available">网络未连接</string>
 
     <string name="setting_title">设置</string>
     <string name="setting_pannel_category">分类设置</string>

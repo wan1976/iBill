@@ -190,7 +190,6 @@ public abstract class BaseFragment extends TBaseFragment {
     public void onDisconnect() {
     }
 
-
     @Override
     public void handleMessage(Message message) {
         switch (message.what) {

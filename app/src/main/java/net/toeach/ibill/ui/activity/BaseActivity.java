@@ -215,6 +215,11 @@ public abstract class BaseActivity extends TBaseActivity {
         showToast(message);
     }
 
+    /**
+     * 收到系统消息
+     *
+     * @param event 消息对象
+     */
     public void onEvent(BillEvent event) {
         if (event == null) {
             return;
