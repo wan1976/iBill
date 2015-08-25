@@ -42,7 +42,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 明细添加/修改界面
  */
-@ContentView(R.layout.bill_record_modify_layout)
+@ContentView(R.layout.activity_record_modify)
 public class BillRecordModifyActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     @ViewInject(R.id.bill_date)
     private TextView mTxtDate;// 日期

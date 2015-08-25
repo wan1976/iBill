@@ -31,7 +31,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 分类添加/修改界面
  */
-@ContentView(R.layout.bill_category_modify_layout)
+@ContentView(R.layout.activity_category_modify)
 public class BillCategoryModifyActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     @ViewInject(R.id.cat_name)
     private EditText mTxtName;// 名称

@@ -4,10 +4,10 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
     <!--标题-->
-    <include layout="@layout/inc_title_layout"/>
+    <include layout="@layout/inc_title"/>
 
     <ListView
-        android:id="@+id/record_list"
+        android:id="@+id/form_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/panel_white"

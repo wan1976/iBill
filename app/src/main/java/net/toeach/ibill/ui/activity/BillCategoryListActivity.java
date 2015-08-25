@@ -30,7 +30,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 /**
  * 分类列表界面
  */
-@ContentView(R.layout.bill_category_list_layout)
+@ContentView(R.layout.activity_category_list)
 public class BillCategoryListActivity extends BaseActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     @ViewInject(R.id.cat_list)
     private ListView mListView;// 分类列表

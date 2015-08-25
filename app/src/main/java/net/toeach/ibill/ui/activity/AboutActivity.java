@@ -13,7 +13,7 @@ import net.toeach.ibill.R;
 /**
  * 关于界面
  */
-@ContentView(R.layout.about_layout)
+@ContentView(R.layout.activity_about)
 public class AboutActivity extends BaseActivity {
     @ViewInject(R.id.version)
     private TextView mTxtVersion;// 当前应用版本名称

@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
     <!--标题-->
-    <include layout="@layout/inc_title_layout"/>
+    <include layout="@layout/inc_title"/>
     <!--分类管理-->
     <LinearLayout
         android:id="@+id/btn_category"

@@ -6,7 +6,7 @@
               android:orientation="vertical">
 
     <!--标题-->
-    <include layout="@layout/inc_title_layout"/>
+    <include layout="@layout/inc_title"/>
 
     <ListView
         android:id="@+id/list"

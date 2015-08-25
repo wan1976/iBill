@@ -42,7 +42,7 @@ public class BillFormFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bill_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_from_list, container, false);
         ViewUtils.inject(this, view);
         initView(view);
         init();

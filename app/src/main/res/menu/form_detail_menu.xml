@@ -7,4 +7,8 @@
     <item
         android:id="@+id/menu_2"
         android:title="删除账单"/>
+
+    <item
+        android:id="@+id/menu_3"
+        android:title="图形分析"/>
 </menu>

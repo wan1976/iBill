@@ -25,7 +25,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 月账单创建界面
  */
-@ContentView(R.layout.monthly_bill_add_layout)
+@ContentView(R.layout.activity_monthly_bill_add)
 public class MonthlyBillAddActivity extends BaseActivity {
     @ViewInject(R.id.month)
     private EditText mTxtMonth;// 账单月份

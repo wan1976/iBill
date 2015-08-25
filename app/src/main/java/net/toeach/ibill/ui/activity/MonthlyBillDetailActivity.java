@@ -27,7 +27,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 月账单详情界面
  */
-@ContentView(R.layout.monthly_bill_detail_layout)
+@ContentView(R.layout.activity_monthly_bill_detail)
 public class MonthlyBillDetailActivity extends BaseActivity {
     @ViewInject(R.id.list)
     private ListView mListView;// 列表对象
@@ -56,6 +56,10 @@ public class MonthlyBillDetailActivity extends BaseActivity {
                             }
                             case R.id.menu_2: {// 删除账单
                                 showDeleteConfirm();
+                                break;
+                            }
+                            case R.id.menu_3: {// 图表
+
                                 break;
                             }
                         }
@@ -104,7 +108,7 @@ public class MonthlyBillDetailActivity extends BaseActivity {
         String title = getIntent().getStringExtra("title");
         title = String.format(getString(R.string.form_detail_title_name), title);
         // 设置列表标头
-        View header = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_header_layout, null, false);
+        View header = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_header, null, false);
         TextView txtTitle = (TextView)header.findViewById(R.id.title);
         txtTitle.setText(title);
         mListView.addHeaderView(header);

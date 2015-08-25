@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@ContentView(R.layout.feedback_layout)
+@ContentView(R.layout.activity_feedback)
 public class FeedbackActivity extends BaseActivity {
     private final int VIEW_TYPE_COUNT = 2;
     private final int VIEW_TYPE_USER = 0;

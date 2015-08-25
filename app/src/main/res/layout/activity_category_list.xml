@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/background"
               android:orientation="vertical">
     <!--标题-->
-    <include layout="@layout/inc_title_layout"/>
+    <include layout="@layout/inc_title"/>
 
     <ListView
-        android:id="@+id/form_list"
+        android:id="@+id/cat_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/panel_white"

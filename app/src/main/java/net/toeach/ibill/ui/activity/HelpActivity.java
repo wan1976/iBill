@@ -11,7 +11,7 @@ import net.toeach.ibill.R;
 /**
  * 帮助界面
  */
-@ContentView(R.layout.help_layout)
+@ContentView(R.layout.activity_help)
 public class HelpActivity extends BaseActivity {
     @ViewInject(R.id.webview)
     private WebView mWebView;

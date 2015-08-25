@@ -42,7 +42,7 @@ public class BillRecordFragment extends BaseFragment implements AdapterView.OnIt
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.record_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_record_list, container, false);
         ViewUtils.inject(this, view);
         initView(view);
         init();

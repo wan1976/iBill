@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/title"
         style="@style/AppTheme.UI.Form.TitleText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="201508"/>
@@ -19,6 +19,5 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
         android:background="@drawable/dot_line"/>
 </LinearLayout>

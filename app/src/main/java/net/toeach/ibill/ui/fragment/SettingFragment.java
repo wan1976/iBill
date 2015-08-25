@@ -39,7 +39,7 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.setting_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_setting, container, false);
         ViewUtils.inject(this, view);
 
         initView(view);

@@ -30,7 +30,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 应用主界面
  */
-@ContentView(R.layout.main_layout)
+@ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
     @ViewInject(R.id.tab_1)
     private ImageView mTabItem1;// tab1

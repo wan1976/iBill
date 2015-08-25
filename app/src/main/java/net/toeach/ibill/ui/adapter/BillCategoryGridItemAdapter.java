@@ -33,7 +33,7 @@ public class BillCategoryGridItemAdapter extends BaseArrayAdapter<BillCategory> 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bill_category_grid_item_layout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bill_category_grid_item, parent, false);
             holder = new ViewHolder();
             ViewUtils.inject(holder, convertView);
             convertView.setTag(holder);
