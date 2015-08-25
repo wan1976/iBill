@@ -30,6 +30,7 @@
 
             <TextView
                 android:id="@+id/fb_reply_content"
+                style="@style/AppTheme.UI.List.Item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/fb_user_reply_bg"
@@ -37,9 +38,7 @@
                 android:paddingBottom="12dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="12dp"
-                android:paddingTop="12dp"
-                android:textColor="#070707"
-                android:textSize="14sp"/>
+                android:paddingTop="12dp"/>
 
             <ImageView
                 android:id="@+id/fb_reply_state_failed"
