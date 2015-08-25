@@ -191,7 +191,7 @@ public class BillFormManager extends BaseManager {
     /**
      * 获取月账单数据
      *
-     * @param formId 账单表示
+     * @param formId  账单表示
      * @param handler Handler对象
      */
     public void getMonthlyFormDetail(int formId, Handler handler) {

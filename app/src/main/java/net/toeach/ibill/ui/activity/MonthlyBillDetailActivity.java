@@ -117,7 +117,7 @@ public class MonthlyBillDetailActivity extends BaseActivity {
         String title = getIntent().getStringExtra("title");
         title = String.format(getString(R.string.form_detail_title_name), title);
         View header = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_header, null, false);
-        TextView txtTitle = (TextView)header.findViewById(R.id.title);
+        TextView txtTitle = (TextView) header.findViewById(R.id.title);
         txtTitle.setText(title);
         mListView.addHeaderView(header);
 
