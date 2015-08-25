@@ -1,5 +1,6 @@
 package net.toeach.ibill.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -8,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.shehabic.droppy.DroppyClickCallbackInterface;
@@ -33,6 +38,7 @@ public class MonthlyBillDetailActivity extends BaseActivity {
     private ListView mListView;// 列表对象
 
     private MonthlyBillDetailListItemAdapter mAdapter;// 适配器
+    private PieChart mChart;// 图表对象
     private int mFormId;
 
     @Override
@@ -58,10 +64,6 @@ public class MonthlyBillDetailActivity extends BaseActivity {
                                 showDeleteConfirm();
                                 break;
                             }
-                            case R.id.menu_3: {// 图表
-
-                                break;
-                            }
                         }
                     }
                 })
@@ -79,6 +81,8 @@ public class MonthlyBillDetailActivity extends BaseActivity {
                     mAdapter.clear();
                     mAdapter.addAll(list);
                     mAdapter.notifyDataSetChanged();
+                    // 加载图表数据
+                    loadChartData();
                 }
                 break;
             case BillFormManager.MSG_DEL_SUCCESS:
@@ -93,6 +97,10 @@ public class MonthlyBillDetailActivity extends BaseActivity {
                 loadData();
                 dismissProgressDialog();
                 break;
+            case BillFormManager.MSG_GET_VALUE:
+                PieData data = (PieData) message.obj;
+                showChart(data);
+                break;
         }
     }
 
@@ -105,18 +113,38 @@ public class MonthlyBillDetailActivity extends BaseActivity {
         setFuncButton(R.drawable.button_more);// 设置功能按钮
         mFormId = getIntent().getIntExtra("id", -1);
 
+        // 设置列表标头
         String title = getIntent().getStringExtra("title");
         title = String.format(getString(R.string.form_detail_title_name), title);
-        // 设置列表标头
         View header = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_header, null, false);
         TextView txtTitle = (TextView)header.findViewById(R.id.title);
         txtTitle.setText(title);
         mListView.addHeaderView(header);
 
+        // 添加图表到footer
+        View chartView = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_chart, null, false);
+        mChart = (PieChart) chartView.findViewById(R.id.chart);
+        mChart.setDragDecelerationFrictionCoef(0.95f);
+        mChart.setUsePercentValues(true);// 是否显示百分比
+        mChart.setDescription("账单分析");
+        mChart.setCenterText("各类型费用\n所占比例");// 显示在中心部分的文字
+        mChart.setDrawCenterText(true);// 是否在空心部分显示文字
+        mChart.setDrawSliceText(false);// 是否显示X轴值
+        mChart.setDrawHoleEnabled(true);// 是否显示中间空心部分
+        mChart.setHoleColorTransparent(true);// 中间空心部分是否透明
+        mChart.setHoleRadius(55f);// 空心部分的半径
+        mChart.setTransparentCircleRadius(58f);// 阴影部分的半径
+        mChart.setTransparentCircleColor(Color.WHITE);
+        mChart.setTransparentCircleAlpha(110);
+        mChart.setRotationAngle(0);
+        mChart.setRotationEnabled(false);// 是否允许旋转
+        mListView.addFooterView(chartView);
+
         // 设置列表Footer
         ImageView footer = new ImageView(this);
         footer.setBackgroundResource(R.drawable.bottom_line);
         mListView.addFooterView(footer);
+
         mAdapter = new MonthlyBillDetailListItemAdapter(this);
         mListView.setAdapter(mAdapter);
         loadData();
@@ -126,6 +154,7 @@ public class MonthlyBillDetailActivity extends BaseActivity {
      * 加载数据
      */
     private void loadData() {
+        showProgressDialog();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -203,5 +232,38 @@ public class MonthlyBillDetailActivity extends BaseActivity {
                 BillFormManager.getInstance().reCreateMonthlyForm(mFormId, handler);
             }
         }).start();
+    }
+
+    /**
+     * 加载饼图图形数据
+     */
+    private void loadChartData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                BillFormManager.getInstance().getFormChartData(mFormId, handler);
+            }
+        }).start();
+    }
+
+    /**
+     * 显示饼图图形
+     *
+     * @param data 饼图数据对象
+     */
+    private void showChart(PieData data) {
+        mChart.setData(data);
+        mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
+        Legend l = mChart.getLegend();
+        l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+
+        // undo all highlights
+        mChart.highlightValues(null);
+        mChart.invalidate();
+        mChart.setVisibility(View.VISIBLE);
+        dismissProgressDialog();
     }
 }

@@ -81,4 +81,29 @@ public class BillSectionRecordDao extends TBaseDao<BillSectionRecord> {
 
         return list;
     }
+
+    /**
+     * 获取子账单下的费用明细合计
+     *
+     * @param sectionId 子账单标识
+     * @return 费用明细合计
+     * @throws DbException 异常
+     */
+    public int getSectionSum(int sectionId) throws DbException {
+        String sql = "select sum(a.cost) from bill_record a, bill_section_record b" +
+                " where a._id=b.record_id and b.section_id=" + sectionId;
+        Cursor c = db.execQuery(sql);
+        if (c != null) {
+            try {
+                if (c.moveToNext()) {
+                    return c.getInt(0);
+                }
+            } finally {
+                if (c != null) {
+                    c.close();
+                }
+            }
+        }
+        return 0;
+    }
 }

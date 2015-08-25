@@ -1,8 +1,14 @@
 package net.toeach.ibill.business;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.PercentFormatter;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.util.LogUtils;
 
@@ -185,8 +191,8 @@ public class BillFormManager extends BaseManager {
     /**
      * 获取月账单数据
      *
-     * @param formId
-     * @param handler
+     * @param formId 账单表示
+     * @param handler Handler对象
      */
     public void getMonthlyFormDetail(int formId, Handler handler) {
         try {
@@ -226,6 +232,61 @@ public class BillFormManager extends BaseManager {
             list.add(item);
 
             handleMessage(handler, MSG_LIST_SUCCESS, list);// 发送消息通知UI
+        } catch (DbException e) {
+            handleException(handler, new TException("Database occurs error."));// 抛出系统错误
+        }
+    }
+
+    /**
+     * 获取账单图表数据
+     *
+     * @param formId  账单表示
+     * @param handler Handler对象
+     */
+    public void getFormChartData(int formId, Handler handler) {
+        try {
+            // 获取子账单列表
+            List<BillSection> sections = BillSectionDao.getInstance().getList(formId);
+            if (sections == null) {
+                handleError(handler, 1012);
+                return;
+            }
+
+            int i = 0;
+            ArrayList<String> xValues = new ArrayList<String>();// X坐标
+            ArrayList<Entry> yValues = new ArrayList<Entry>();// Y坐标
+            for (BillSection section : sections) {
+                xValues.add(section.getTitle());
+                int sum = BillSectionRecordDao.getInstance().getSectionSum(section.getId());
+                yValues.add(new Entry(sum, i));
+                i++;
+            }
+
+            // add a lot of colors
+            ArrayList<Integer> colors = new ArrayList<Integer>();
+            for (int c : ColorTemplate.VORDIPLOM_COLORS)
+                colors.add(c);
+            for (int c : ColorTemplate.JOYFUL_COLORS)
+                colors.add(c);
+            for (int c : ColorTemplate.COLORFUL_COLORS)
+                colors.add(c);
+            for (int c : ColorTemplate.LIBERTY_COLORS)
+                colors.add(c);
+            for (int c : ColorTemplate.PASTEL_COLORS)
+                colors.add(c);
+            colors.add(ColorTemplate.getHoloBlue());
+
+            PieDataSet dataSet = new PieDataSet(yValues, "费用类型");
+            dataSet.setSliceSpace(3f);
+            dataSet.setSelectionShift(5f);
+            dataSet.setColors(colors);
+
+            PieData data = new PieData(xValues, dataSet);
+            data.setValueFormatter(new PercentFormatter());
+            data.setValueTextSize(11f);
+            data.setValueTextColor(Color.BLACK);
+
+            handleMessage(handler, MSG_GET_VALUE, data);// 发送消息通知UI
         } catch (DbException e) {
             handleException(handler, new TException("Database occurs error."));// 抛出系统错误
         }

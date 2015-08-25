@@ -182,5 +182,6 @@ public class IBillApplication extends Application {
         Constants.ERRORS.put(1009, getString(R.string.err_1009));
         Constants.ERRORS.put(1010, getString(R.string.err_1010));
         Constants.ERRORS.put(1011, getString(R.string.err_1011));
+        Constants.ERRORS.put(1012, getString(R.string.err_1012));
     }
 }

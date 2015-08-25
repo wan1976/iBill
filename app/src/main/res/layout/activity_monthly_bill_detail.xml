@@ -8,6 +8,7 @@
     <!--标题-->
     <include layout="@layout/inc_title"/>
 
+    <!--列表-->
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"

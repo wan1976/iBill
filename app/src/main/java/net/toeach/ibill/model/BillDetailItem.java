@@ -8,7 +8,7 @@ public class BillDetailItem {
     private String cost;
     private String date;
     private String memo;
-    private int type;// 0：标题，1:内容，2:合计
+    private int type;// 0：Section，1:账单记录，2:合计
 
     public String getTitle() {
         return title;

@@ -69,4 +69,5 @@
     <string name="err_1009">分类名称已经存在</string>
     <string name="err_1010">账单月份不能为空</string>
     <string name="err_1011">对应月份的账单已经存在</string>
+    <string name="err_1012">账单数据不能为空</string>
 </resources>
