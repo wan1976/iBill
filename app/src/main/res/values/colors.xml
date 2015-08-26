@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00000000</color>
-    <color name="background">#f2f2f2</color>
+    <!--<color name="background">#f6f6f6</color>-->
+    <color name="background">#ebebeb</color>
     <color name="panel_white">#ffffff</color>
 
 </resources>
