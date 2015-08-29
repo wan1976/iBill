@@ -116,7 +116,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
                 showToast(R.string.record_modify_save_success);
                 finish();
                 // 通知分类列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_RECORD, null);
+                BillEvent event = new BillEvent(BillEvent.EVENT_RELOAD_RECORD, null);
                 EventBus.getDefault().post(event);
                 break;
             }
@@ -124,7 +124,7 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
                 showToast(R.string.record_modify_delete_success);
                 finish();
                 // 通知分类列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_RECORD, null);
+                BillEvent event = new BillEvent(BillEvent.EVENT_RELOAD_RECORD, null);
                 EventBus.getDefault().post(event);
                 break;
             }
@@ -177,9 +177,9 @@ public class BillRecordModifyActivity extends BaseActivity implements AdapterVie
         LogUtils.d(event.toString());
 
         // 获取事件类型
-        BillEvent.EventType eventType = event.getEventType();
+        int eventType = event.getEventType();
         // 重新加载数据
-        if (eventType.equals(BillEvent.EventType.EVENT_RELOAD_CAT)) {
+        if (eventType == BillEvent.EVENT_RELOAD_CAT) {
             // 加载分类数据
             new Thread(new Runnable() {
                 @Override

@@ -55,14 +55,14 @@ public class MonthlyBillAddActivity extends BaseActivity {
             case BillFormManager.MSG_SAVE_SUCCESS:
                 // 进入到详情界面
                 BillForm form = (BillForm) message.obj;
-                Intent i = new Intent(this, MonthlyBillDetailActivity.class);
+                Intent i = new Intent(this, BillDetailActivity.class);
                 i.putExtra("id", form.getId());
                 i.putExtra("title", form.getTitle());
                 startActivity(i);
                 dismissProgressDialog();
 
                 // 通知账单列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_BILL, null);
+                BillEvent event = new BillEvent(BillEvent.EVENT_RELOAD_BILL, null);
                 EventBus.getDefault().post(event);
                 finish();
                 break;
@@ -82,7 +82,7 @@ public class MonthlyBillAddActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                BillFormManager.getInstance().isMonthlyFormExisted(mForm.getTitle(), handler);
+                BillFormManager.getInstance().isFormExisted(mForm, handler);
             }
         }).start();
     }
@@ -92,7 +92,7 @@ public class MonthlyBillAddActivity extends BaseActivity {
      */
     private void init() {
         // 设置标题名称
-        setTitleValue(R.string.form_add_title);
+        setTitleValue(R.string.form_monthly_add_title);
         setFuncButton(R.drawable.button_next);
 
         // 设置默认月份
@@ -172,7 +172,7 @@ public class MonthlyBillAddActivity extends BaseActivity {
      */
     private void showConfirm(final BillForm form) {
         new SweetAlertDialog(this)
-                .setTitleText(getString(R.string.form_existed))
+                .setTitleText(getString(R.string.form_monthly_existed))
                 .setConfirmText(getString(R.string.button_yes))
                 .setCancelText(getString(R.string.button_no))
                 .showCancelButton(true)

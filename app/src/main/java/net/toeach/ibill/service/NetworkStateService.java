@@ -72,9 +72,9 @@ public class NetworkStateService extends Service {
         }
         LogUtils.d(event.toString());
         // 获取事件类型
-        BillEvent.EventType eventType = event.getEventType();
+        int eventType = event.getEventType();
         // 网络状态查询
-        if (eventType.equals(BillEvent.EventType.EVENT_NET_STAT_QUERY)) {
+        if (eventType == BillEvent.EVENT_NET_STAT_QUERY) {
             BillEvent event1 = getNetworkState();
             mBus.post(event1);
         }
@@ -94,6 +94,6 @@ public class NetworkStateService extends Service {
             data.put("state", 1);
         }
 
-        return new BillEvent(BillEvent.EventType.EVENT_NET_STAT_RESULT, data);
+        return new BillEvent(BillEvent.EVENT_NET_STAT_RESULT, data);
     }
 }

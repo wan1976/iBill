@@ -227,9 +227,9 @@ public abstract class BaseActivity extends TBaseActivity {
         LogUtils.d(event.toString());
 
         // 获取事件类型
-        BillEvent.EventType eventType = event.getEventType();
+        int eventType = event.getEventType();
         // 网络状态查询结果
-        if (eventType.equals(BillEvent.EventType.EVENT_NET_STAT_RESULT)) {
+        if (eventType == BillEvent.EVENT_NET_STAT_RESULT) {
             // 网络状态
             int state = (Integer) event.getData().get("state");
             if (state == 1) {// 网络断开

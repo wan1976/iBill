@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
                     // 通知升级标志显示
                     Map<String, String> data = new HashMap<>();
                     data.put("show_flag", "true");
-                    BillEvent event = new BillEvent(BillEvent.EventType.EVENT_UPDATE, data);
+                    BillEvent event = new BillEvent(BillEvent.EVENT_UPDATE, data);
                     EventBus.getDefault().post(event);
                 }
             }
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity {
                     // 通知升级标志隐藏
                     Map<String, String> data = new HashMap<>();
                     data.put("show_flag", "false");
-                    BillEvent event = new BillEvent(BillEvent.EventType.EVENT_UPDATE, data);
+                    BillEvent event = new BillEvent(BillEvent.EVENT_UPDATE, data);
                     EventBus.getDefault().post(event);
                 }
             }

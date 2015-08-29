@@ -57,7 +57,7 @@ public class BillCategoryModifyActivity extends BaseActivity implements AdapterV
                 showToast(R.string.category_modify_save_success);
                 finish();
                 // 通知分类列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_CAT, null);
+                BillEvent event = new BillEvent(BillEvent.EVENT_RELOAD_CAT, null);
                 EventBus.getDefault().post(event);
                 break;
         }

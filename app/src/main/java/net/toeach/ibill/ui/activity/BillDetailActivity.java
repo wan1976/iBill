@@ -1,5 +1,6 @@
 package net.toeach.ibill.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
@@ -32,14 +33,16 @@ import de.greenrobot.event.EventBus;
 /**
  * 月账单详情界面
  */
-@ContentView(R.layout.activity_monthly_bill_detail)
-public class MonthlyBillDetailActivity extends BaseActivity {
+@ContentView(R.layout.activity_bill_detail)
+public class BillDetailActivity extends BaseActivity {
     @ViewInject(R.id.list)
     private ListView mListView;// 列表对象
 
     private MonthlyBillDetailListItemAdapter mAdapter;// 适配器
     private PieChart mChart;// 图表对象
     private int mFormId;
+    private int mFormType;
+    private String mFormTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +53,46 @@ public class MonthlyBillDetailActivity extends BaseActivity {
     @Override
     public void doFunction() {
         DroppyMenuPopup.Builder builder = new DroppyMenuPopup.Builder(this, mBtnFunc);
-        DroppyMenuPopup mMenu = builder.fromMenu(R.menu.form_detail_menu)
-                .triggerOnAnchorClick(false)
-                .setOnClick(new DroppyClickCallbackInterface() {
-                    @Override
-                    public void call(View v, int id) {
-                        switch (id) {
-                            case R.id.menu_1: {// 重新生成账单
-                                showRedoConfirm();
-                                break;
-                            }
-                            case R.id.menu_2: {// 删除账单
-                                showDeleteConfirm();
-                                break;
+        DroppyMenuPopup mMenu;
+        if (mFormType == 0) {
+            mMenu = builder.fromMenu(R.menu.form_detail_monthly_menu)
+                    .triggerOnAnchorClick(false)
+                    .setOnClick(new DroppyClickCallbackInterface() {
+                        @Override
+                        public void call(View v, int id) {
+                            switch (id) {
+                                case R.id.menu_1: {// 重新生成账单
+                                    showRedoConfirm();
+                                    break;
+                                }
+                                case R.id.menu_2: {// 删除账单
+                                    showDeleteConfirm();
+                                    break;
+                                }
                             }
                         }
-                    }
-                })
-                .build();
+                    })
+                    .build();
+        } else {
+            mMenu = builder.fromMenu(R.menu.form_detail_customized_menu)
+                    .triggerOnAnchorClick(false)
+                    .setOnClick(new DroppyClickCallbackInterface() {
+                        @Override
+                        public void call(View v, int id) {
+                            switch (id) {
+                                case R.id.menu_1: {// 修改自定义账单
+                                    doModifyCustomizedBill();
+                                    break;
+                                }
+                                case R.id.menu_2: {// 删除账单
+                                    showDeleteConfirm();
+                                    break;
+                                }
+                            }
+                        }
+                    })
+                    .build();
+        }
         mMenu.show();
     }
 
@@ -89,7 +114,7 @@ public class MonthlyBillDetailActivity extends BaseActivity {
                 showToast(R.string.form_detail_delete_success);
                 finish();
                 // 通知账单列表面刷新UI
-                BillEvent event = new BillEvent(BillEvent.EventType.EVENT_RELOAD_BILL, null);
+                BillEvent event = new BillEvent(BillEvent.EVENT_RELOAD_BILL, null);
                 EventBus.getDefault().post(event);
                 break;
             case BillFormManager.MSG_SAVE_SUCCESS:
@@ -112,10 +137,11 @@ public class MonthlyBillDetailActivity extends BaseActivity {
         setTitleValue(R.string.form_detail_title);
         setFuncButton(R.drawable.button_more);// 设置功能按钮
         mFormId = getIntent().getIntExtra("id", -1);
+        mFormType = getIntent().getIntExtra("type", 0);
 
         // 设置列表标头
-        String title = getIntent().getStringExtra("title");
-        title = String.format(getString(R.string.form_detail_title_name), title);
+        mFormTitle = getIntent().getStringExtra("title");
+        String title = String.format(getString(R.string.form_detail_title_name), mFormTitle);
         View header = LayoutInflater.from(this).inflate(R.layout.bill_form_detail_header, null, false);
         TextView txtTitle = (TextView) header.findViewById(R.id.title);
         txtTitle.setText(title);
@@ -252,18 +278,30 @@ public class MonthlyBillDetailActivity extends BaseActivity {
      * @param data 饼图数据对象
      */
     private void showChart(PieData data) {
-        mChart.setData(data);
-        mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
-        Legend l = mChart.getLegend();
-        l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
+        if (data.getDataSet().getYVals().size() > 0) {
+            mChart.setData(data);
+            mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
+            Legend l = mChart.getLegend();
+            l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+            l.setXEntrySpace(7f);
+            l.setYEntrySpace(0f);
+            l.setYOffset(0f);
 
-        // undo all highlights
-        mChart.highlightValues(null);
-        mChart.invalidate();
-        mChart.setVisibility(View.VISIBLE);
+            // undo all highlights
+            mChart.highlightValues(null);
+            mChart.invalidate();
+            mChart.setVisibility(View.VISIBLE);
+        }
         dismissProgressDialog();
+    }
+
+    /**
+     * 修改账单资料
+     */
+    private void doModifyCustomizedBill() {
+        Intent intent = new Intent(this, CustomizedBillModifyActivity.class);
+        intent.putExtra("id", mFormId);
+        intent.putExtra("title", mFormTitle);
+        startActivity(intent);
     }
 }

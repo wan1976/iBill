@@ -6,7 +6,17 @@ import java.util.Map;
  * EventBus事件对象.
  */
 public class BillEvent {
-    private EventType eventType;// 事件类型
+    /**
+     * 事件类型定义
+     */
+    public final static int EVENT_NET_STAT_QUERY = 1; // 网络状态查询
+    public final static int EVENT_NET_STAT_RESULT = 2; // 网络状态查询结果
+    public final static int EVENT_RELOAD_CAT = 3; // 重新加载分类数据
+    public final static int EVENT_RELOAD_RECORD = 4; // 重新加载明细记录数据
+    public final static int EVENT_RELOAD_BILL = 5; // 重新加载账单记录数据
+    public final static int EVENT_UPDATE = 6; // 升级通知
+
+    private int eventType;// 事件类型
     private Map<String, ?> data;// 附带数据
 
     /**
@@ -21,16 +31,16 @@ public class BillEvent {
      * @param eventType
      * @param data
      */
-    public BillEvent(EventType eventType, Map<String, ?> data) {
+    public BillEvent(int eventType, Map<String, ?> data) {
         this.eventType = eventType;
         this.data = data;
     }
 
-    public EventType getEventType() {
+    public int getEventType() {
         return eventType;
     }
 
-    public void setEventType(EventType eventType) {
+    public void setEventType(int eventType) {
         this.eventType = eventType;
     }
 
@@ -48,17 +58,5 @@ public class BillEvent {
                 "eventType=" + eventType +
                 ", data=" + data +
                 '}';
-    }
-
-    /**
-     * 事件类型定义
-     */
-    public enum EventType {
-        EVENT_NET_STAT_QUERY, // 网络状态查询
-        EVENT_NET_STAT_RESULT, // 网络状态查询结果
-        EVENT_RELOAD_CAT,// 重新加载分类数据
-        EVENT_RELOAD_RECORD,// 重新加载明细记录数据
-        EVENT_RELOAD_BILL,// 重新加载账单记录数据
-        EVENT_UPDATE;// 升级通知
     }
 }
